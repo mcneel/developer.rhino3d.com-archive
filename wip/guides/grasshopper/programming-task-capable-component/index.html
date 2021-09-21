@@ -77,8 +77,8 @@
   <!-- For Chrome for Android: -->
   <link rel="icon" sizes="192x192" href="/wip/images/touch-icon-192x192.png">
 
-  <!-- Diable crawling until this version is the stable version -->
-  <meta name="robots" content="noindex" />
+  <!-- Enable crawling because this version is the stable version -->
+  <!--<meta name="robots" content="noindex" />-->
 </head>
 
 
@@ -496,7 +496,7 @@ $(document).ready(function()
         
         <a href="/wip/authors/scott_davidson">Scott Davidson</a>
         
-           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/grasshopper/programming-task-capable-component.md" target="_blank">05 Dec 2018</a>)
+           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/grasshopper/programming-task-capable-component.md" target="_blank">30 Jun 2021</a>)
     
   </span>
 
@@ -506,7 +506,7 @@ $(document).ready(function()
 
           <h2 id="overview">Overview</h2>
 
-<p>Grasshopper for Rhino 6 allows you to develop multi-threaded components by way of the new <code>IGH_TaskCapableComponent</code> interface. Benchmarks have shown that Grasshopper can run significantly faster when using multi-threaded components.  Results may vary, as not all solutions can be computed in parallel.</p>
+<p>Grasshopper for Rhino allows you to develop multi-threaded components by way of the new <code>IGH_TaskCapableComponent</code> interface. Benchmarks have shown that Grasshopper can run significantly faster when using multi-threaded components.  Results may vary, as not all solutions can be computed in parallel.</p>
 
 <h2 id="the-interface">The Interface</h2>
 
@@ -676,7 +676,7 @@ $(document).ready(function()
 }
 </code></pre>
 
-<p>The full source code for this revision <a href="https://github.com/mcneel/rhino-developer-samples/tree/6/grasshopper/cs/SampleGhTaskCapable">can be seen here</a>.</p>
+<p>The full source code for this revision <a href="https://github.com/mcneel/rhino-developer-samples/tree/7/grasshopper/cs/SampleGhTaskCapable">can be seen here</a>.</p>
 
         </article>
 

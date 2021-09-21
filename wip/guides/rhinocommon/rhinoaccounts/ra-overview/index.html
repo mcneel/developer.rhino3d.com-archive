@@ -77,8 +77,8 @@
   <!-- For Chrome for Android: -->
   <link rel="icon" sizes="192x192" href="/wip/images/touch-icon-192x192.png">
 
-  <!-- Diable crawling until this version is the stable version -->
-  <meta name="robots" content="noindex" />
+  <!-- Enable crawling because this version is the stable version -->
+  <!--<meta name="robots" content="noindex" />-->
 </head>
 
 
@@ -439,7 +439,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/wip/authors/aj">Andrés Jacobo</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinocommon/rhinoaccounts/ra-overview.md" target="_blank">10 Mar 2020</a>)
+      by <a href="/wip/authors/aj">Andrés Jacobo</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinocommon/rhinoaccounts/ra-overview.md" target="_blank">13 May 2021</a>)
     
   </span>
 
@@ -465,7 +465,7 @@ $(document).ready(function()
 
 <p>To take Advantage of Rhino Accounts within Rhino:</p>
 <ol>
-  <li><a href="mailto:aj@mcneel.com">Contact us</a> to obtain a unique client id and secret for Rhino Accounts. This will represent your service within the system.</li>
+  <li><a href="mailto:will@mcneel.com">Contact us</a> to obtain a unique client id and secret for Rhino Accounts. This will represent your service within the system.</li>
   <li><a href="/wip/guides/rhinocommon/rhinoaccounts/ra-example">Call <code>GetTokensAsync</code> or <code>TryGetAuthTokens</code> to retrieve authentication and authorization tokens</a>.</li>
   <li>(<em>Optional</em>) <a href="/wip/guides/rhinocommon/rhinoaccounts/ra-revoke">Call <code>RevokeAuthTokenAsync</code> to invalidate an authorization token when you no longer need it.</a>.</li>
 </ol>

@@ -77,8 +77,8 @@
   <!-- For Chrome for Android: -->
   <link rel="icon" sizes="192x192" href="/wip/images/touch-icon-192x192.png">
 
-  <!-- Diable crawling until this version is the stable version -->
-  <meta name="robots" content="noindex" />
+  <!-- Enable crawling because this version is the stable version -->
+  <!--<meta name="robots" content="noindex" />-->
 </head>
 
 
@@ -507,7 +507,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/wip/authors/aj">Andrés Jacobo</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinocommon/cloudzoo/cloudzoo-optional-endpoints.md" target="_blank">07 May 2020</a>)
+      by <a href="/wip/authors/aj">Andrés Jacobo</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinocommon/cloudzoo/cloudzoo-optional-endpoints.md" target="_blank">02 Jun 2021</a>)
     
   </span>
 
@@ -520,7 +520,8 @@ $(document).ready(function()
 <p>Unless noted, the following conventions apply to <em>all</em> endpoints available to registered issuers in Cloud Zoo.</p>
 
 <h3 id="endpoint-location">Endpoint Location</h3>
-<p>All endpoint requests should be made to All calls are to made to <code>https://cloudzoo.rhino3d.com/v1</code>.</p>
+
+<p>The base URL for all requests is <code>https://cloudzoo.rhino3d.com/v1</code>.</p>
 
 <h3 id="json">JSON</h3>
 
@@ -562,6 +563,12 @@ $(document).ready(function()
 <h3 id="delete-license">DELETE /license</h3>
 
 <p>Removes a license from Cloud Zoo. This method deletes the entire <a href="/wip/guides/rhinocommon/cloudzoo/cloudzoo-licensecluster">License Cluster object</a> the license is in. If the License Cluster the license belongs to contains additional licenses, they will be removed as well.</p>
+
+<div class="alert alert-info" role="alert">
+    <!-- <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> -->
+	<strong>Heads up!</strong>
+    This endpoint expects the arguments to be passed as a <a href="https://en.wikipedia.org/wiki/Query_string" class="alert-link">query string</a>.
+</div>
 
 <h4 id="example-request">Example Request</h4>
 

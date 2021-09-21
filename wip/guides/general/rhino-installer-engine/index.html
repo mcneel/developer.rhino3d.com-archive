@@ -77,8 +77,8 @@
   <!-- For Chrome for Android: -->
   <link rel="icon" sizes="192x192" href="/wip/images/touch-icon-192x192.png">
 
-  <!-- Diable crawling until this version is the stable version -->
-  <meta name="robots" content="noindex" />
+  <!-- Enable crawling because this version is the stable version -->
+  <!--<meta name="robots" content="noindex" />-->
 </head>
 
 
@@ -385,7 +385,7 @@ $(document).ready(function()
             
             
             <li>
-              <a href="#overview">Overview</a>
+              <a href="#overview-windows">Overview (Windows)</a>
 
               
 
@@ -521,7 +521,7 @@ $(document).ready(function()
         
         <a href="/wip/authors/will_pearson">Will Pearson</a>
         
-           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/general/rhino-installer-engine.md" target="_blank">13 Dec 2018</a>)
+           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/general/rhino-installer-engine.md" target="_blank">27 Jul 2021</a>)
     
   </span>
 
@@ -529,11 +529,11 @@ $(document).ready(function()
 
           <p>This guide is a brief introduction to the Rhino Installer Engine.</p>
 
-          <div class="alert alert-info" role="alert">
-<strong>Note:</strong> This guide describes the Rhino Installer Engine that is installed with Rhino for <strong>Windows</strong>. Rhino for Mac also has a method of packaging plug-ins for easy installation, see the <a href="/wip/guides/rhinocommon/plugin-installers-mac">Plugin Installers (Mac)</a> guide.
+          <div class="alert alert-warning" role="alert">
+⚠️ This technology is obsolete as of Rhino 7 and has been replaced by the <a href="/wip/guides/yak/">yak format along with the PackageManager.</a>
 </div>
 
-<h2 id="overview">Overview</h2>
+<h2 id="overview-windows">Overview (Windows)</h2>
 
 <p>The Rhino Installer Engine simplifies distribution, installation and updating of plug-ins for Rhino for Windows.</p>
 

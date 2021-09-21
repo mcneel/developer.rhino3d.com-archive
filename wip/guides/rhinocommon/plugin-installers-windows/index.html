@@ -77,8 +77,8 @@
   <!-- For Chrome for Android: -->
   <link rel="icon" sizes="192x192" href="/wip/images/touch-icon-192x192.png">
 
-  <!-- Diable crawling until this version is the stable version -->
-  <meta name="robots" content="noindex" />
+  <!-- Enable crawling because this version is the stable version -->
+  <!--<meta name="robots" content="noindex" />-->
 </head>
 
 
@@ -496,7 +496,7 @@ $(document).ready(function()
         
         <a href="/wip/authors/will_pearson">Will Pearson</a>
         
-           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinocommon/plugin-installers-windows.md" target="_blank">13 Dec 2018</a>)
+           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinocommon/plugin-installers-windows.md" target="_blank">27 Jul 2021</a>)
     
   </span>
 
@@ -504,7 +504,11 @@ $(document).ready(function()
 
           <p>This guide explains how to create a plugin installer for Rhino for Windows.</p>
 
-          <div class="alert alert-info" role="alert">
+          <div class="alert alert-warning" role="alert">
+⚠️ The Rhino Installer Engine is no longer in active development. Please see the <a class="alert-link" href="/wip/guides/yak/creating-a-rhino-plugin-package/">Package Manager</a> instead.
+</div>
+
+<div class="alert alert-info" role="alert">
 <strong>Note</strong>: This process is the same for both C/C++ and RhinoCommon plug-ins!
 </div>
 

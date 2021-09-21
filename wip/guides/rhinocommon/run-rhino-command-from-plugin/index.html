@@ -77,8 +77,8 @@
   <!-- For Chrome for Android: -->
   <link rel="icon" sizes="192x192" href="/wip/images/touch-icon-192x192.png">
 
-  <!-- Diable crawling until this version is the stable version -->
-  <meta name="robots" content="noindex" />
+  <!-- Enable crawling because this version is the stable version -->
+  <!--<meta name="robots" content="noindex" />-->
 </head>
 
 
@@ -455,7 +455,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/wip/authors/dale_fugier">Dale Fugier</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinocommon/run-rhino-command-from-plugin.md" target="_blank">15 Apr 2019</a>)
+      by <a href="/wip/authors/dale_fugier">Dale Fugier</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinocommon/run-rhino-command-from-plugin.md" target="_blank">02 Aug 2021</a>)
     
   </span>
 
@@ -481,12 +481,10 @@ $(document).ready(function()
 </ul>
 
 <div class="tab-content">
-  <pre class="tab-pane fade in active" id="cs1"><code class="language-cs">[System.Runtime.InteropServices.Guid(&lt;&lt;test_command_guid&gt;&gt;)]
-public class TestCommand : Rhino.Commands.Command
+  <pre class="tab-pane fade in active" id="cs1"><code class="language-cs">public class TestCommand : Rhino.Commands.Command
 </code></pre>
 
-  <pre class="tab-pane fade in" id="vb1"><code class="language-vbnet">&lt;System.Runtime.InteropServices.Guid(&lt;&lt;test_command_guid&gt;&gt;)&gt; _
-Public Class TestCommand
+  <pre class="tab-pane fade in" id="vb1"><code class="language-vbnet">Public Class TestCommand
   Inherits Rhino.Commands.Command
 </code></pre>
 
@@ -500,17 +498,11 @@ Public Class TestCommand
 </ul>
 
 <div class="tab-content">
-  <pre class="tab-pane fade in active" id="cs2"><code class="language-cs">[
- System.Runtime.InteropServices.Guid(&lt;&lt;test_command_guid&gt;&gt;),
- Rhino.Commands.CommandStyle(Rhino.Commands.Style.ScriptRunner)
-]
+  <pre class="tab-pane fade in active" id="cs2"><code class="language-cs">[Rhino.Commands.CommandStyle(Rhino.Commands.Style.ScriptRunner)]
 public class TestCommand : Rhino.Commands.Command
 </code></pre>
 
-  <pre class="tab-pane fade in" id="vb2"><code class="language-vbnet">&lt; _
-  System.Runtime.InteropServices.Guid(&lt;&lt;test_command_guid&gt;&gt;), _
-  Rhino.Commands.CommandStyle(Rhino.Commands.Style.ScriptRunner) _
-&gt; _
+  <pre class="tab-pane fade in" id="vb2"><code class="language-vbnet">&lt;Rhino.Commands.CommandStyle(Rhino.Commands.Style.ScriptRunner)&gt;
 Public Class TestCommand
   Inherits Rhino.Commands.Command
 </code></pre>

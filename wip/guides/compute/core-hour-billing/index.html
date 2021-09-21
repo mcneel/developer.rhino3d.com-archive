@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Licensing & Billing with </title>
-  <meta name="description" content="">
+  <meta name="description" content="The developer.rhino3d.com website contents">
 
   <!-- OpenGraph for Facebook, Twitter, Slack unfurling -->
   <meta property="og:type" content="website" />
@@ -77,8 +77,8 @@
   <!-- For Chrome for Android: -->
   <link rel="icon" sizes="192x192" href="/wip/images/touch-icon-192x192.png">
 
-  <!-- Diable crawling until this version is the stable version -->
-  <meta name="robots" content="noindex" />
+  <!-- Enable crawling because this version is the stable version -->
+  <!--<meta name="robots" content="noindex" />-->
 </head>
 
 
@@ -471,7 +471,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/wip/authors/brian_gillespie">Brian Gillespie</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/compute/core-hour-billing.md" target="_blank">25 Nov 2020</a>)
+      by <a href="/wip/authors/brian_gillespie">Brian Gillespie</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/compute/core-hour-billing.md" target="_blank">15 Mar 2021</a>)
     
   </span>
 
@@ -486,13 +486,24 @@ $(document).ready(function()
 <p><em><strong>Example 1:</strong> Rhino running on a 32-core server for one hour:</em></p>
 
 <ul>
-  <li>32-cores * 1 hour * $0.10/core-hour = $3.20</li>
+  <li>1 computer * 32-cores * 1 hour * $0.10/core-hour = $3.20</li>
 </ul>
 
 <p><em><strong>Example 2:</strong> Rhino running on 200 4-core servers for 6 minutes:</em></p>
 
 <ul>
   <li>200 computers * 4 cores * 0.1 hour * $0.10/core-hour = $8.00</li>
+</ul>
+
+<p><em><strong>Example 3:</strong> 1 Rhino instance running on a 2-core server 8 hours a day for 30 days:</em></p>
+<ul>
+  <li>1 computer * 2 cores * 8 hours/day * 30 days/month * $0.10/core-hour = $48/month</li>
+</ul>
+
+<p><em><strong>Example 4:</strong> 10 Rhino instances running on a 2-core server 8 hours a day for 30 days:</em></p>
+<ul>
+  <li>1 computer * 2 cores * 8 hours/day * 30 days/month * $0.10/core-hour = $48/month</li>
+  <li>(Notice that the number of instances of Rhino does not affect your bill)</li>
 </ul>
 
 <p><strong>Billing is based on uptime</strong>, not on usage - we don’t track the activity of each core, just that you have one running with Rhino. You can scale your workloads up and down to optimize performance and cost to you.</p>

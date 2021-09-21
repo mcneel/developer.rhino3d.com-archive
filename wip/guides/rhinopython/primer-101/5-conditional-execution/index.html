@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>5 Conditional Statements with Python</title>
-  <meta name="description" content="">
+  <meta name="description" content="The developer.rhino3d.com website contents">
 
   <!-- OpenGraph for Facebook, Twitter, Slack unfurling -->
   <meta property="og:type" content="website" />
@@ -77,8 +77,8 @@
   <!-- For Chrome for Android: -->
   <link rel="icon" sizes="192x192" href="/wip/images/touch-icon-192x192.png">
 
-  <!-- Diable crawling until this version is the stable version -->
-  <meta name="robots" content="noindex" />
+  <!-- Enable crawling because this version is the stable version -->
+  <!--<meta name="robots" content="noindex" />-->
 </head>
 
 
@@ -498,7 +498,7 @@ $(document).ready(function()
         
         <a href="/wip/authors/steve_baer">Steve Baer</a>
         
-           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinopython/primer-101/5-conditional-execution.md" target="_blank">05 Dec 2018</a>)
+           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinopython/primer-101/5-conditional-execution.md" target="_blank">24 Apr 2021</a>)
     
   </span>
 
@@ -852,14 +852,13 @@ for x in rs.frange(dblA, dblB, dblStep):
 <pre><code class="language-python">import math
 import rhinoscriptsyntax as rs
 
-pi = math.Pi()
 dblTwistAngle = 0.0
 
 rs.EnableRedraw(False)
 for z in rs.frange(0.0, 5.0, 0.5):
-   dblTwistAngle = dblTwistAngle + (pi/30)
+   dblTwistAngle = dblTwistAngle + (math.pi/30)
 
-   for a in rs.frange(0.0, 2*pi, (pi/15)):
+   for a in rs.frange(0.0, 2*math.pi, (math.pi/15)):
        x = 5 * math.sin(a + dblTwistAngle)
        y = 5 * math.cos(a + dblTwistAngle)
        rs.AddSphere([x,y,z], 0.5)

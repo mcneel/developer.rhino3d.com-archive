@@ -77,8 +77,8 @@
   <!-- For Chrome for Android: -->
   <link rel="icon" sizes="192x192" href="/wip/images/touch-icon-192x192.png">
 
-  <!-- Diable crawling until this version is the stable version -->
-  <meta name="robots" content="noindex" />
+  <!-- Enable crawling because this version is the stable version -->
+  <!--<meta name="robots" content="noindex" />-->
 </head>
 
 
@@ -560,7 +560,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/wip/authors/dale_lear">Dale Lear</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/opennurbs/getting-started.md" target="_blank">05 Dec 2018</a>)
+      by <a href="/wip/authors/dale_lear">Dale Lear</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/opennurbs/getting-started.md" target="_blank">01 Jul 2021</a>)
     
   </span>
 
@@ -581,12 +581,12 @@ $(document).ready(function()
 <p>The openNURBS C++ toolkit has been successfully used with the following compilers:</p>
 
 <ul>
-  <li><em>Microsoft Visual Studio 2017</em>: to build openNURBS and the examples with <em>Visual Studio 2017</em>, use the solution <em>opennurbs_public.sln</em>.</li>
+  <li><em>Microsoft Visual Studio 2019</em>: to build openNURBS and the examples with <em>Visual Studio 2019</em>, use the solution <em>opennurbs_public.sln</em>.</li>
 </ul>
 
 <p>To use C++ opennurbs in your Visual Studio project:</p>
 <ol>
-  <li>Open opennurbs_public.sln in VisualStudio, select the platform and configuration, and rebuild all.</li>
+  <li>Open opennurbs_public.sln in Visual Studio, select the platform and configuration, and rebuild all.</li>
   <li>In your project’s stdafx.h, put the following lines. This will include all the header files you need to call C++ opennurbs and automatically link in the correct libraries:
     <pre><code>// defining OPENNURBS_PUBLIC_INSTALL_DIR enables automatic linking using pragmas
 #define OPENNURBS_PUBLIC_INSTALL_DIR "&lt;MY_INSTALLPATH&gt;"

@@ -6,21 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>License Agreement with C/C++</title>
-  <meta name="description" content="This guide provides the license agreement of C/C++ SDK.  Using C/C++">
+  <title>Extending Compute with Custom Endpoints with C#, VB</title>
+  <meta name="description" content="Extending Compute with custom endpoints  Using C#, VB">
 
   <!-- OpenGraph for Facebook, Twitter, Slack unfurling -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="/guides/cpp/license-agreement/" />
-  <meta property="og:title" content="License Agreement" />
-  <meta property="og:description" content="This guide provides the license agreement of C/C++ SDK." />
+  <meta property="og:url" content="/guides/compute/custom-endpoints/" />
+  <meta property="og:title" content="Extending Compute with Custom Endpoints" />
+  <meta property="og:description" content="Extending Compute with custom endpoints" />
   <meta property=”og:site_name” content="developer.rhino3d.com"/>
   <meta property=”og:image” content="http://developer.rhino3d.com/images/rhinodev-logo-unfurl.png"/>
 
   <!-- twitter card tags additive with the og: tags -->
   <meta name="twitter:domain" value="developer.rhino3d.com" />
-  <meta name="twitter:title" value="License Agreement" />
-  <meta name="twitter:description" value="This guide provides the license agreement of C/C++ SDK." />
+  <meta name="twitter:title" value="Extending Compute with Custom Endpoints" />
+  <meta name="twitter:description" value="Extending Compute with custom endpoints" />
   
     <meta name="twitter:image" content="http://developer.rhino3d.com/images/rhinodev-logo-unfurl.png" />
   
@@ -31,7 +31,7 @@
   
   
   <meta name="twitter:label2" value="Language(s)" />
-  <meta name="twitter:data2" value="C/C++" />
+  <meta name="twitter:data2" value="C#, VB" />
   
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
@@ -53,7 +53,7 @@
   <!-- Bootstrap override -->
   <link rel="stylesheet" href="/wip/css/bootstrap-override.css">
 
-  <link rel="canonical" href="http://developer.rhino3d.com/wip/guides/cpp/license-agreement/">
+  <link rel="canonical" href="http://developer.rhino3d.com/wip/guides/compute/custom-endpoints/">
   <link rel="alternate" type="application/rss+xml" title="Rhino Developer Docs" href="http://developer.rhino3d.com/wip/feed.xml" />
 
   <link rel="shortcut icon" href="https://developer.rhino3d.com/favicon.ico?v=2" />
@@ -77,8 +77,8 @@
   <!-- For Chrome for Android: -->
   <link rel="icon" sizes="192x192" href="/wip/images/touch-icon-192x192.png">
 
-  <!-- Diable crawling until this version is the stable version -->
-  <meta name="robots" content="noindex" />
+  <!-- Enable crawling because this version is the stable version -->
+  <!--<meta name="robots" content="noindex" />-->
 </head>
 
 
@@ -118,7 +118,7 @@
   <div class="version-banner version-banner-warning">
 
     
-      <strong>WARNING:</strong> You're viewing the <strong>Rhino WIP</strong> version of this page! <a href="/guides/cpp/license-agreement/">View the current version instead.</a>
+      <strong>WARNING:</strong> You're viewing the <strong>Rhino WIP</strong> version of this page! <a href="/guides/compute/custom-endpoints/">View the current version instead.</a>
     
 </div>
 
@@ -392,40 +392,73 @@ $(document).ready(function()
               
               
               
-              <li><a href="/wip/guides/cpp">C/C++</a></li>
+              <li><a href="/wip/guides/compute">Compute</a></li>
 
               
                 
-                  <li class="active">Overview</li>
+                  <li class="active">Getting Started</li>
                 
               
           </ol>
 
-          <h1>License Agreement</h1>
+          <h1>Extending Compute with Custom Endpoints</h1>
 
           <p>
   <span class="guide_byline">
     
+    
+    by
       
-      by <a href="/wip/authors/dale_fugier">Dale Fugier</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/cpp/license-agreement.md" target="_blank">21 Aug 2020</a>)
+        
+        <a href="/wip/authors/steve_baer">Steve Baer</a>
+         and
+      
+        
+        <a href="/wip/authors/will_pearson">Will Pearson</a>
+        
+           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/compute/custom-endpoints.md" target="_blank">03 Feb 2021</a>)
     
   </span>
 
 </p>
 
-          <p>This guide provides the license agreement of C/C++ SDK.</p>
+          <p>Extending Compute with custom endpoints</p>
 
-          <h4 id="rhino-cc-software-development-kit-sdk">Rhino C/C++ Software Development Kit (SDK)</h4>
+          <!-- originally posted to discourse: https://discourse.mcneel.com/t/extending-rhinocompute-server-with-plugins/84266 -->
 
-<hr />
+<p>By default Compute exposes a long list of endpoints, designed to expose functionality in RhinoCommon as well as enabling Grasshopper definitions and Python scripts to be solved. It’s also possible to extend Compute with your own custom endpoints by registering functions in a Rhino plug-in. Compute handles the serialization.</p>
 
-<p>Copyright (c) 1993-2020 Robert McNeel &amp; Associates. All Rights Reserved.</p>
+<p>First define a static class in your plug-in and add the new function as a static method (you can add more than one!).</p>
 
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software.</p>
+<pre><code class="language-csharp">static class MyCustomComputeFunctions
+{
+  public static double Add(double, x, double y, double z) { return x+y+z; }
 
-<p>THIS SOFTWARE IS PROVIDED “AS IS” WITHOUT EXPRESS OR IMPLIED WARRANTY. ALL IMPLIED WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND OF MERCHANTABILITY ARE HEREBY DISCLAIMED.</p>
+  public static double AdjustedArea(Curve curve, double adjuster)
+  {
+    var amp = Rhino.Geometry.AreaMassProperties.Compute(curve);
+    return amp.Area * adjuster;
+  }
+}
+</code></pre>
 
-<p>Rhinoceros and openNURBS are a registered trademarks of Robert McNeel &amp; Associates.</p>
+<p>Then, in the <code>OnLoad</code> method of the plug-in’s <code>PlugIn</code> class, register the function. This code is called once when the plug-in is loaded by Rhino.</p>
+
+<pre><code class="language-csharp">protected override LoadReturnCode OnLoad(ref string errorMessage)
+{
+  Rhino.Runtime.HostUtils.RegisterComputeEndPoint("Rhino.CustomEndPoint", typeof(MyCustomComputeFunctions));
+
+  return base.OnLoad(ref errorMessage);
+}
+</code></pre>
+
+<p>You will need to install your plug-in in Rhino, both locally for testing and on any servers where Compute runs.</p>
+
+<p>Once this is complete, you should be able to open the <code>/sdk</code> endpoint in a browser and see the new functions listed at the bottom of the page.</p>
+
+<div class="alert alert-info" role="alert">
+Check out the <a href="https://github.com/mcneel/rhino-developer-samples/tree/7/compute/cs/ComputePlugIn" class="alert-link">ComputePlugIn sample</a> in the Rhino Developer Samples repository.
+</div>
 
         </article>
 
@@ -450,8 +483,17 @@ $(document).ready(function()
 
             <p class="text">
               
-                
-                Author: <a href="/wip/authors/dale_fugier">Dale Fugier</a>
+                Authors:
+                <ul>
+                  
+                  
+                    
+                    <li><a href="/wip/authors/steve_baer">Steve Baer</a></li>
+                  
+                    
+                    <li><a href="/wip/authors/will_pearson">Will Pearson</a></li>
+                  
+                </ul>
               
             </p>
           </div>
@@ -461,7 +503,7 @@ $(document).ready(function()
                 <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
               </svg>
             </span>
-            <a href="https://github.com/mcneel/developer-rhino3d-com/blob/master/_guide_topics/cpp/license-agreement.md" target="_blank">Edit page on GitHub</a>
+            <a href="https://github.com/mcneel/developer-rhino3d-com/blob/master/_guide_topics/compute/custom-endpoints.md" target="_blank">Edit page on GitHub</a>
           </div>
             <div class="col-md-4">
               <span class="pull-right">
