@@ -422,7 +422,7 @@ $(document).ready(function()
                     
                     
                     <li>
-                        <a href="#install-hops-using-the-package-manager-in-rhino-7-for-windows">Install Hops using the Pa...</a>
+                        <a href="#installing-hops-for-windows">Installing Hops for Windows:</a>
                     </li>
                   
                     
@@ -642,8 +642,12 @@ $(document).ready(function()
       
         
         <a href="/authors/scott_davidson">Scott Davidson</a>
+         and
+      
         
-           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/grasshopper/hops-component.md" target="_blank">02 Jun 2021</a>)
+        <a href="/authors/andy_payne">Andy Payne</a>
+        
+           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/grasshopper/hops-component.md" target="_blank">28 Oct 2021</a>)
     
   </span>
 
@@ -676,13 +680,18 @@ $(document).ready(function()
 
 <p><br /></p>
 
-<h3 id="install-hops-using-the-package-manager-in-rhino-7-for-windows">Install Hops using the Package Manager in Rhino 7 for Windows:</h3>
+<h3 id="installing-hops-for-windows">Installing Hops for Windows:</h3>
 
+<p>There are a few ways to install hops on your machine.</p>
 <ol>
-  <li><a href="rhino://package/search?name=hops">Install Hops</a></li>
-  <li>Or, type <code>PackageManager</code> on the Rhino command line.</li>
-  <li>Search for “Hops”</li>
-  <li>Select Hops and then Install</li>
+  <li><a href="rhino://package/search?name=hops">Install Hops</a> (This will launch Rhino)</li>
+  <li>Or, type <code>PackageManager</code> on the Rhino command line.
+    <ol>
+      <li>Then, search for “Hops”</li>
+      <li>Select Hops and then Install</li>
+    </ol>
+  </li>
+  <li>Or, <a href="https://www.food4rhino.com/en/app/hops">download Hops</a> from www.food4rhino.com</li>
 </ol>
 
 <p><img src="/images/hopsinstall.jpg" class="img-center" width="80%" /></p>
@@ -691,26 +700,44 @@ $(document).ready(function()
 
 <p>Hops functions are Grasshopper documents with special inputs and outputs.</p>
 
-<p><img src="/images/hops-function.png" class="img-center" width="100%" /></p>
+<p><img src="/images/hops-function-3.png" class="img-center" width="100%" /></p>
 
-<p>Hops inputs are Get components. The name of the component is used for the name of the Hops input parameter.</p>
+<h4 id="defining-inputs">Defining Inputs</h4>
 
-<p><img src="/images/hops-input.png" class="img-center" width="40%" /></p>
+<p>Hops inputs are created using the <strong>Get Components</strong>. The available Get components in Grasshopper are found under <em>Params Tab &gt; Util Group</em>:</p>
 
-<p>Available Get components are:</p>
+<p><img src="/images/hops-get-components.png" class="img-center" width="60%" /></p>
 
-<p><img src="/images/get-components.jpg" class="img-center" width="80%" /></p>
+<p>The name of the component is used for the name of the Hops input parameter. So, in the example above, we have three Get components with names A, B, and C. Each of these Get components become input parameters when Hops compiles the definition.</p>
+
+<p><img src="/images/hops_inputs-2.png" class="img-center" width="80%" /></p>
+
+<p>Each Get component has a context menu (right-click) with various settings.</p>
+
+<p><img src="/images/get_component_menu.png" class="img-center" width="55%" /></p>
+
+<ul>
+  <li><strong>Component Name</strong> - This is the name that will be assigned to the input of the Hops component.</li>
+  <li><strong>Prompt</strong> - This input is only used for the Grasshopper Player and will show up as a command line prompt to the user.</li>
+  <li><strong>Enable/Disable</strong> - Enable or disable this component.</li>
+  <li><strong>At Least</strong> - This is only used for the Grasshopper Player and will define the minimum number of values to accept for this input.</li>
+  <li><strong>At Most</strong> - This will define the maximum number of values to accept for this input (Default = 1). If this value is set to 1, the Hops component will treat this input as <em>Item Access</em>. However, if this value is more than one (or unset) Hops will treat this input as <em>List Access</em>.</li>
+  <li><strong>Minimum &amp; Maximum</strong> - These optional inputs are only used for the Grasshopper Player and will clamp numeric inputs to these bounds.</li>
+  <li><strong>Presets</strong> - This optional input is only used for the Grasshopper Player and are only found on the <em>String</em>, <em>Integer</em>, and <em>Number</em> Get components. This dialog allows you to set a list of predefined options which will be displayed to the user via the command line prompt.</li>
+</ul>
+
+<h4 id="defining-outputs">Defining Outputs</h4>
 
 <p>Hops outputs are geometry or primitive params in a group named: “RH_OUT:[name]”, where [name] is the name of the output parameter. In this case, the name of the output is “o”.</p>
 
-<p><img src="/images/hops-output.png" class="img-center" width="30%" /></p>
+<p><img src="/images/hops_output.png" class="img-center" width="80%" /></p>
 
 <h3 id="use-the-hops-component">Use the Hops component</h3>
 
 <ol>
-  <li>Place the Grasshopper Params Tab &gt; Util Group &gt; Hops component on the canvas.</li>
+  <li>Place the Grasshopper <em>Params Tab &gt; Util Group &gt; Hops component</em> onto the canvas.</li>
   <li>Right-click the Hops Component, then click Path.</li>
-  <li>Select a Hops Function.</li>
+  <li>Select a Hops Function. Note: this can be a Grasshopper definition on your computer, on a remote computer, or a REST endpoint.</li>
   <li>The component will show the inputs and outputs.</li>
   <li>Use the new component like any other Grasshopper component.</li>
 </ol>
@@ -808,7 +835,7 @@ $(document).ready(function()
   <li>Install Rhino 7.5 or above on the remote computer.</li>
   <li>Make sure Rhino runs and is properly licensed.</li>
   <li>Get the very latest version of compute.geometry.exe. Either build it yourself or get build from our CI server at
-https://ci.appveyor.com/project/mcneel/compute-rhino3d/branch/master/artifacts</li>
+<a href="https://ci.appveyor.com/project/mcneel/compute-rhino3d/branch/master/artifacts">https://ci.appveyor.com/project/mcneel/compute-rhino3d/branch/master/artifacts</a></li>
   <li>Run compute.geometry.exe from an Administrator Command Line with an address parameter. For example
 ‘compute.geometry.exe -address http://192.168.1.6:6123’. 192.168.1.6 is your computer’s address. The port can be any you want; but we tend to use values above 6000.</li>
   <li>Note the IP address of the remote machine.</li>
@@ -918,6 +945,9 @@ http://192.168.1.6:6123</p>
                   
                     
                     <li><a href="/authors/scott_davidson">Scott Davidson</a></li>
+                  
+                    
+                    <li><a href="/authors/andy_payne">Andy Payne</a></li>
                   
                 </ul>
               
