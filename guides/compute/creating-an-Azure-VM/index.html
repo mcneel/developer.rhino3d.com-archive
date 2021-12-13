@@ -404,6 +404,22 @@ $(document).ready(function()
               <a href="#creating-the-virtual-machine">Creating the Virtual Machine</a>
 
               
+                <ul class="nav nav-stacked">
+                  
+
+                  
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="#add-an-inbound-port-rule">Add an inbound port rule</a>
+                    </li>
+                  
+
+                </ul>
+              
 
             </li>
           
@@ -501,6 +517,31 @@ $(document).ready(function()
   </li>
   <li>
     <p>After deployment is complete, select <strong>Go to resource</strong>.</p>
+  </li>
+</ol>
+
+<h3 id="add-an-inbound-port-rule">Add an inbound port rule</h3>
+
+<p>Once your virtual machine has been deployed you should be able to go to the resource home page. Here, you can change various settings and configurations. We are going to add an inbound port rule so that we can send API requests on a dedicated port.</p>
+
+<p>By default, Azure denies and blocks all public inbound traffic - which also includes ICMP traffic. This is a good thing since it improves security by reducing the attack surface. The <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol">Internet Control Message Protocol (ICMP)</a> is typically used for diagnostics and to troubleshoot networking issues.</p>
+
+<p>We’ll want to turn ICMP traffic on for our VM so that we can try to ping the IP address and make sure we get a response. The first thing we need to do is add an inbound port rule for ICMP traffic.</p>
+
+<ol>
+  <li>
+    <p>On the left-hand side menu, select the <strong>Networking</strong> menu item. This will open the Networking blade.</p>
+  </li>
+  <li>
+    <p>Click on the <strong>Add inbound port rule</strong> button
+<img src="/images/Azure_VM_Create6.png" class="img-center" width="100%" /></p>
+  </li>
+  <li>
+    <p>In the <strong>Add inbound security rule</strong> pane, set the <strong>Destination port ranges</strong> to *, change the <strong>Protocol</strong> to <strong>ICMP</strong>, set the <strong>Priority</strong> to <strong>100</strong>, and type <strong>ICMP</strong> in the <strong>Name</strong> input.
+<img src="/images/Azure_VM_Create8.png" class="img-center" width="75%" /></p>
+  </li>
+  <li>
+    <p>Click <strong>Add</strong> to create the new inbound port rule.</p>
   </li>
 </ol>
 
