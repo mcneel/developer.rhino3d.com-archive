@@ -6,20 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Licensing & Billing with </title>
+  <title>How to create a virtual machine (VM) on Azure with C#, VB</title>
   <meta name="description" content="The developer.rhino3d.com website contents">
 
   <!-- OpenGraph for Facebook, Twitter, Slack unfurling -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="/guides/compute/core-hour-billing/" />
-  <meta property="og:title" content="Licensing & Billing" />
+  <meta property="og:url" content="/guides/compute/creating-an-Azure-VM/" />
+  <meta property="og:title" content="How to create a virtual machine (VM) on Azure" />
   <meta property="og:description" content="" />
   <meta property=”og:site_name” content="developer.rhino3d.com"/>
   <meta property=”og:image” content="http://developer.rhino3d.com/images/rhinodev-logo-unfurl.png"/>
 
   <!-- twitter card tags additive with the og: tags -->
   <meta name="twitter:domain" value="developer.rhino3d.com" />
-  <meta name="twitter:title" value="Licensing & Billing" />
+  <meta name="twitter:title" value="How to create a virtual machine (VM) on Azure" />
   <meta name="twitter:description" value="" />
   
     <meta name="twitter:image" content="http://developer.rhino3d.com/images/rhinodev-logo-unfurl.png" />
@@ -31,7 +31,7 @@
   
   
   <meta name="twitter:label2" value="Language(s)" />
-  <meta name="twitter:data2" value="" />
+  <meta name="twitter:data2" value="C#, VB" />
   
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
@@ -53,7 +53,7 @@
   <!-- Bootstrap override -->
   <link rel="stylesheet" href="/wip/css/bootstrap-override.css">
 
-  <link rel="canonical" href="http://developer.rhino3d.com/wip/guides/compute/core-hour-billing/">
+  <link rel="canonical" href="http://developer.rhino3d.com/wip/guides/compute/creating-an-Azure-VM/">
   <link rel="alternate" type="application/rss+xml" title="Rhino Developer Docs" href="http://developer.rhino3d.com/wip/feed.xml" />
 
   <link rel="shortcut icon" href="https://developer.rhino3d.com/favicon.ico?v=2" />
@@ -118,7 +118,7 @@
   <div class="version-banner version-banner-warning">
 
     
-      <strong>WARNING:</strong> You're viewing the <strong>Rhino WIP</strong> version of this page! <a href="/guides/compute/core-hour-billing/">View the current version instead.</a>
+      <strong>WARNING:</strong> You're viewing the <strong>Rhino WIP</strong> version of this page! <a href="/guides/compute/creating-an-Azure-VM/">View the current version instead.</a>
     
 </div>
 
@@ -393,56 +393,24 @@ $(document).ready(function()
             
             
             <li>
-              <a href="#about-core-hour-billing">About Core-Hour Billing</a>
+              <a href="#creating-the-virtual-machine">Creating the Virtual Machine</a>
 
               
+                <ul class="nav nav-stacked">
+                  
 
-            </li>
-          
+                  
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="#azure-settings">Azure Settings</a>
+                    </li>
+                  
 
-        
-          
-
-          
-            
-            
-            
-            
-            <li>
-              <a href="#setting-up-core-hour-billing">Setting Up Core-Hour Billing</a>
-
-              
-
-            </li>
-          
-
-        
-          
-
-          
-            
-            
-            
-            
-            <li>
-              <a href="#using-core-hour-billing">Using Core-Hour Billing</a>
-
-              
-
-            </li>
-          
-
-        
-          
-
-          
-            
-            
-            
-            
-            <li>
-              <a href="#single-computer-licensing-not-supported">Single-Computer licensing...</a>
-
+                </ul>
               
 
             </li>
@@ -473,13 +441,13 @@ $(document).ready(function()
               
           </ol>
 
-          <h1>Licensing & Billing</h1>
+          <h1>How to create a virtual machine (VM) on Azure</h1>
 
           <p>
   <span class="guide_byline">
     
       
-      by <a href="/wip/authors/brian_gillespie">Brian Gillespie</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/compute/core-hour-billing.md" target="_blank">13 Dec 2021</a>)
+      by <a href="/wip/authors/andy_payne">Andy Payne</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/compute/creating-an-Azure-VM.md" target="_blank">13 Dec 2021</a>)
     
   </span>
 
@@ -487,75 +455,66 @@ $(document).ready(function()
 
           <p></p>
 
-          <h2 id="about-core-hour-billing">About Core-Hour Billing</h2>
+          <h2 id="creating-the-virtual-machine">Creating the Virtual Machine</h2>
 
-<p>When Rhino is logged in to a service account and is running on a Windows Server-based operating system, you will be billed <strong>$0.10 per core per hour</strong> that Rhino is running (pro-rated per minute).</p>
+<p>In this guide, we will walk through the process of setting up a virtual machine using Azure services.</p>
 
-<p><em><strong>Example 1:</strong> Rhino running on a 32-core server for one hour:</em></p>
+<p>To start, please confirm that you have a valid Azure subscription and that you have already setup a resource group to hold the various resources for this instance. To learn more about setting up a resource group on Azure, <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal">visit this page</a>.</p>
 
-<ul>
-  <li>1 computer * 32-cores * 1 hour * $0.10/core-hour = $3.20</li>
-</ul>
-
-<p><em><strong>Example 2:</strong> Rhino running on 200 4-core servers for 6 minutes:</em></p>
-
-<ul>
-  <li>200 computers * 4 cores * 0.1 hour * $0.10/core-hour = $8.00</li>
-</ul>
-
-<p><em><strong>Example 3:</strong> 1 Rhino instance running on a 2-core server 8 hours a day for 30 days:</em></p>
-<ul>
-  <li>1 computer * 2 cores * 8 hours/day * 30 days/month * $0.10/core-hour = $48/month</li>
-</ul>
-
-<p><em><strong>Example 4:</strong> 10 Rhino instances running on a 2-core server 8 hours a day for 30 days:</em></p>
-<ul>
-  <li>1 computer * 2 cores * 8 hours/day * 30 days/month * $0.10/core-hour = $48/month</li>
-  <li>(Notice that the number of instances of Rhino does not affect your bill)</li>
-</ul>
-
-<p><strong>Billing is based on uptime</strong>, not on usage - we don’t track the activity of each core, just that you have one running with Rhino. You can scale your workloads up and down to optimize performance and cost to you.</p>
-
-<p><strong>Multiple instances are allowed</strong> - you may run as many instances of Rhino on the same machine as you want, and the cost will be the same as running one instance.</p>
-
-<h2 id="setting-up-core-hour-billing">Setting Up Core-Hour Billing</h2>
-
-<p>Core-hour billing is required when running Rhino on a Windows Server-based operating system.</p>
+<h3 id="azure-settings">Azure Settings</h3>
 
 <ol>
-  <li>Go to the <a href="https://www.rhino3d.com/licenses?_forceEmpty=true">Licenses Portal</a> (login to your Rhino account if prompted).</li>
-  <li>Click <em>Create New Team</em> and create a team to use for your compute project.</li>
-  <li>Click <em>Action</em> -&gt; <em>Manage Core-Hour Billing</em>.</li>
-  <li>Check the checkbox next to Rhino 6 and Rhino 7 and the checkbox signaling you agree to pay.</li>
-  <li>Click <em>Save</em>, and enter payment information when prompted for your new team.</li>
-</ol>
-
-<h2 id="using-core-hour-billing">Using Core-Hour Billing</h2>
-
-<div class="alert alert-info" role="alert">
-If you're following the <a href="../deploy" class="alert-link">"Deployment" guide</a>, you can <strong>skip step 3.</strong> and simply leave the page open for now. We'll use the token later when running the boostrap script which will take care of setting up the environment variable.
-</div>
-
-<ol>
-  <li>Go to the <a href="https://www.rhino3d.com/licenses?_forceEmpty=true">Licenses Portal</a> and select the team that you just set up with Core-hour billing.</li>
-  <li>Click <em>Action</em> -&gt; <em>Get Auth Token</em> to get a token.</li>
   <li>
-    <p>Create a new environment variable with the name <code>RHINO_TOKEN</code> and use the token as the value. Since the token is too long for Windows’ Environment Variables dialog, it’s easiest to do this via a PowerShell command.</p>
-
-    <pre><code class="language-ps"> [System.Environment]::SetEnvironmentVariable('RHINO_TOKEN', 'your token here', 'Machine')
-</code></pre>
+    <p>Sign in to the Azure <a href="https://portal.azure.com/#home">portal</a>.</p>
+  </li>
+  <li>
+    <p>Type <strong>virutal machines</strong> in the search bar.</p>
+  </li>
+  <li>
+    <p>Under <strong>Services</strong>, select <strong>Virtual machines</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Virtual machines</strong> page, select <strong>Create</strong> then <strong>Virtual Machine</strong></p>
+  </li>
+  <li>
+    <p>In the <strong>Basics</strong> tab, under <strong>Project details</strong>, make sure the correct Subscription and Resource group are selected.</p>
+  </li>
+  <li>
+    <p>Under <strong>Instance details</strong>, create a unique name for the virutal machine. We’ll use <em>Rhino-Compute-VM</em> for our VM name. Select a region close to you, and then select <em>Windows Server 2022 Datacenter - Azure Edition Gen2</em> for the <strong>Image</strong>. Feel free to select any <strong>Size</strong> VM that fits your needs. We’ll use <em>Standard DS2_v2</em> for this example. Leave the other defaults.
+<img src="/wip/images/Azure_VM_Create3.png" class="img-center" width="100%" /></p>
+  </li>
+  <li>
+    <p>Under <strong>Administrator account</strong>, provide a username and a password. Take note of these credentials as we will use these when we log into the remote machine.</p>
+  </li>
+  <li>
+    <p>Under <strong>Inbound port rules</strong>, choose <strong>Allow selected ports</strong> then select <strong>RDP (3389)</strong>, <strong>HTTPS (443)</strong>, and <strong>HTTP (80)</strong>.
+<img src="/wip/images/Azure_VM_Create4.png" class="img-center" width="100%" /></p>
+  </li>
+  <li>
+    <p>Select <strong>Next : Disk &gt;</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Next : Networking &gt;</strong>.</p>
+  </li>
+  <li>
+    <p>Under the <strong>Network interface</strong> section, click on the <em>Create new</em> button under the <strong>Public IP</strong> subsection.</p>
+  </li>
+  <li>
+    <p>When the pop-out blade opens up, select <strong>Static</strong> under the Assignment tab. Click <strong>OK</strong> to save this setting.
+<img src="/wip/images/Azure_VM_Create5.png" class="img-center" width="100%" /></p>
+  </li>
+  <li>
+    <p>Leave all other defaults. Select <strong>Review + create</strong>.</p>
+  </li>
+  <li>
+    <p>Once your configuration passes the validation check, select <strong>Create</strong> to deploy your virtual machine.</p>
+  </li>
+  <li>
+    <p>After deployment is complete, select <strong>Go to resource</strong>.</p>
   </li>
 </ol>
 
-<p>From now on, when you start Rhino on this machine it will use your core-hour billing team.</p>
-
-<div class="alert alert-warning" role="alert">
-<strong>Warning!</strong> This token allows anyone with it to charge your team at will. Do <strong>NOT</strong> share this token with anyone.
-</div>
-
-<h2 id="single-computer-licensing-not-supported">Single-Computer licensing Not Supported</h2>
-
-<p>When running on Windows Server, it is not possible to enter a license key to run as a single-computer license, as Rhino requires a license per core.</p>
+<p>Congratulations! In this guide, you deployed a simple virtual machine on Azure.</p>
 
         </article>
 
@@ -581,7 +540,7 @@ If you're following the <a href="../deploy" class="alert-link">"Deployment" guid
             <p class="text">
               
                 
-                Author: <a href="/wip/authors/brian_gillespie">Brian Gillespie</a>
+                Author: <a href="/wip/authors/andy_payne">Andy Payne</a>
               
             </p>
           </div>
@@ -591,7 +550,7 @@ If you're following the <a href="../deploy" class="alert-link">"Deployment" guid
                 <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
               </svg>
             </span>
-            <a href="https://github.com/mcneel/developer-rhino3d-com/blob/master/_guide_topics/compute/core-hour-billing.md" target="_blank">Edit page on GitHub</a>
+            <a href="https://github.com/mcneel/developer-rhino3d-com/blob/master/_guide_topics/compute/creating-an-Azure-VM.md" target="_blank">Edit page on GitHub</a>
           </div>
             <div class="col-md-4">
               <span class="pull-right">
