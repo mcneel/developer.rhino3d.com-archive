@@ -471,7 +471,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/authors/dale_fugier">Dale Fugier</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/rhinocommon/display-conduits.md" target="_blank">05 Dec 2018</a>)
+      by <a href="/authors/dale_fugier">Dale Fugier</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/rhinocommon/display-conduits.md" target="_blank">13 Dec 2021</a>)
     
   </span>
 
@@ -539,7 +539,9 @@ conduit.Enabled = true;
   protected override void CalculateBoundingBox(CalculateBoundingBoxEventArgs e)
   {
     base.CalculateBoundingBox(e);
-    e.IncludeBoundingBox(new Point3d(0,0,0));
+    var bbox = new BoundingBox();
+    bbox.Union(new Point3d(0, 0, 0));
+    e.IncludeBoundingBox(bbox);
   }
 
   protected override void PreDrawObjects(DrawEventArgs e)
