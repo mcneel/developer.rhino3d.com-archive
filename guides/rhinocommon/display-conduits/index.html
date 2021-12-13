@@ -547,7 +547,7 @@ conduit.Enabled = true;
   protected override void PreDrawObjects(DrawEventArgs e)
   {
     base.PreDrawObjects(e);
-    e.Display.DrawPoint(new Point3d(0,0,0));
+    e.Display.DrawPoint(new Point3d(0, 0, 0));
   }
 }
 </code></pre>
@@ -558,8 +558,10 @@ conduit.Enabled = true;
 
 <pre><code class="language-cs">protected override void CalculateBoundingBox(CalculateBoundingBoxEventArgs e)
 {
-   base.CalculateBoundingBox(e);
-   e.IncludeBoundingBox(e.Display.Viewport.ConstructionPlane().Origin);
+  base.CalculateBoundingBox(e);
+  var bbox = new BoundingBox();
+  bbox.Union(e.Display.Viewport.ConstructionPlane().Origin);
+  e.IncludeBoundingBox(bbox);
 }
 
 protected override void PreDrawObjects(DrawEventArgs e)
