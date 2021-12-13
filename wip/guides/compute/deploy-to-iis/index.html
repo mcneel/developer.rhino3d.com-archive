@@ -422,15 +422,6 @@ $(document).ready(function()
                     
                     
                     <li>
-                        <a href="#add-an-inbound-port-rule">Add an inbound port rule</a>
-                    </li>
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
                         <a href="#connect-via-rdp">Connect via RDP</a>
                     </li>
                   
@@ -640,46 +631,6 @@ $(document).ready(function()
   </li>
 </ul>
 
-<h3 id="add-an-inbound-port-rule">Add an inbound port rule</h3>
-
-<p>Once your virtual machine has been deployed you should be able to go to the resource home page. Here, you can change various settings and configurations. We are going to add an inbound port rule so that we can send API requests on a dedicated port.</p>
-
-<p>By default, Azure denies and blocks all public inbound traffic - which also includes ICMP traffic. This is a good thing since it improves security by reducing the attack surface. The <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol">Internet Control Message Protocol (ICMP)</a> is typically used for diagnostics and to troubleshoot networking issues.</p>
-
-<p>We’ll want to turn ICMP traffic on for our VM so that we can try to ping the IP address and make sure we get a response. The first thing we need to do is add an inbound port rule for ICMP traffic.</p>
-
-<ol>
-  <li>
-    <p>On the left-hand side menu, select the <strong>Networking</strong> menu item. This will open the Networking blade.</p>
-  </li>
-  <li>
-    <p>Click on the <strong>Add inbound port rule</strong> button
-<img src="/wip/images/Azure_VM_Create6.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>In the <strong>Add inbound security rule</strong> pane, set the <strong>Destination port ranges</strong> to *, change the <strong>Protocol</strong> to <strong>ICMP</strong>, set the <strong>Priority</strong> to <strong>100</strong>, and type <strong>ICMP</strong> in the <strong>Name</strong> input.
-<img src="/wip/images/Azure_VM_Create8.png" class="img-center" width="75%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>Add</strong> to create the new inbound port rule.</p>
-  </li>
-</ol>
-
-<p>Next, we need to add a dedicated inbound port rule for the API requests we will be sending to the rhino.compute server. In our VM configuration, we specified that we wanted to create inbound port rules for <strong>RDP (port 3389)</strong>, <strong>HTTPS (port 443)</strong>, and <strong>HTTP (port 80</strong>). Let’s add one more port rule to allow incoming requests on a new port (port 81).</p>
-
-<ol>
-  <li>
-    <p>Again, click the <strong>Add inbound port rule</strong> button.</p>
-  </li>
-  <li>
-    <p>In the <strong>Add inbound security rule</strong> pane, set the <strong>Destination port ranges</strong> to <strong>81</strong>. Note: this number is arbitrary and can be any valid integer value. In the <strong>Name</strong> area, type in <strong>Port_81</strong>. Leave all other defaults.
-<img src="/wip/images/Azure_VM_Create9.png" class="img-center" width="75%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>Add</strong> to create the new inbound port rule.</p>
-  </li>
-</ol>
-
 <h3 id="connect-via-rdp">Connect via RDP</h3>
 
 <p>Now that we’ve configured the virtual machine, we need to be able to log onto it so that we can setup IIS and the rhino.compute instance. We’ll do this by using a remote desktop protocol (RDP) which connects two computers over a network.</p>
@@ -732,59 +683,7 @@ $(document).ready(function()
 
 <h3 id="open-firewall-port">Open Firewall Port</h3>
 
-<p>We have already created an inbound port rule for the Azure network interface, however we must also create a rule to allow messages through the Windows firewall.</p>
-
-<ol>
-  <li>
-    <p>From the <strong>Start</strong> menu, click <strong>Control Panel</strong>, click <strong>System and Security</strong>, and then click <strong>Windows Defender Firewall</strong>.</p>
-  </li>
-  <li>
-    <p>Click <strong>Advanced Settings</strong> in the left-hand menu.</p>
-  </li>
-  <li>
-    <p>Click <strong>Inbound Rules</strong>.</p>
-  </li>
-  <li>
-    <p>Click <strong>New Rule</strong> in the <strong>Actions</strong> window.
-<img src="/wip/images/Firewall_Rule_01.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>Rule Type</strong> of <strong>Port</strong>.</p>
-  </li>
-  <li>
-    <p>Click <strong>Next</strong>.</p>
-  </li>
-  <li>
-    <p>On the <strong>Protocol and Ports</strong> page click <strong>TCP</strong>.</p>
-  </li>
-  <li>
-    <p>Select <strong>Specific Local Ports</strong> and type a value of <strong>81</strong>. This port number is arbitrary but it should match the same value as the one which was set in the Azure portal.
-<img src="/wip/images/Firewall_Rule_02.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>Next</strong>.</p>
-  </li>
-  <li>
-    <p>On the <strong>Action</strong> page, click <strong>Allow the connection</strong>.</p>
-  </li>
-  <li>
-    <p>Click <strong>Next</strong>.</p>
-  </li>
-  <li>
-    <p>On the <strong>Profile</strong> page, make sure <strong>Domain</strong>, <strong>Private</strong>, and <strong>Public</strong> checkboxes are marked.</p>
-  </li>
-  <li>
-    <p>Click <strong>Next</strong>.</p>
-  </li>
-  <li>
-    <p>On the <strong>Name</strong> page, enter a name of <strong>Rhino.Compute Server (TCP on port 81)</strong>.</p>
-  </li>
-  <li>
-    <p>Click <strong>Finish</strong>.</p>
-  </li>
-</ol>
-
-<p>We also need to setup the operating system to answer to ping/ICMP echo requests. On Windows Server, this is disabled by default. We could do this through the Firewall interface, but let’s use a Powershell command instead.</p>
+<p>We have already created an inbound port rule for the Azure network interface and the Windows firewall already has inbound port rules to allow HTTP traffic on port 80 and HTTPS traffic on port 443. However, we must also create a rule to allow ICMP messages through the Windows firewall.</p>
 
 <ol>
   <li>
@@ -1053,14 +952,18 @@ At this point, you should have a folder on your machine labeled <strong>compute-
     <p>Click the <strong>ellipsis</strong> button next to the <strong>Physical path</strong> and select the <strong>rhino.compute</strong> directory (ie. C:\inetpub\wwwroot\compute-for\IIS\rhino.compute).</p>
   </li>
   <li>
-    <p>Under the <strong>Binding</strong> section, type <strong>81</strong> to bind the application to incoming messages on port 81. For now, leave the binding type to <strong>http</strong>.
+    <p>Under the <strong>Binding</strong> section, type <strong>80</strong> to bind the application to incoming messages on port 80. For now, leave the binding type to <strong>http</strong>.
 <img src="/wip/images/IIS_Setup_17.png" class="img-center" width="80%" /></p>
   </li>
   <li>
     <p>Click <strong>OK</strong> to create the site.</p>
   </li>
   <li>
-    <p>Under the <strong>Actions</strong> pane, click <strong>Advanced Settings</strong>.
+    <p>At this point, you may see a popup that says you are trying to use the same binding as another site. This is because the <strong>Default Site</strong> that IIS set up during the initial configuration is also bound on port 80. Click <strong>Yes</strong> and we will edit the binding on the Default Site in a minute.
+<img src="/wip/images/IIS_Setup_26.png" class="img-center" width="60%" /></p>
+  </li>
+  <li>
+    <p>Next, under the <strong>Actions</strong> pane, click <strong>Advanced Settings</strong>.
 <img src="/wip/images/IIS_Setup_24.png" class="img-center" width="100%" /></p>
   </li>
   <li>
@@ -1087,6 +990,46 @@ At this point, you should have a folder on your machine labeled <strong>compute-
   </li>
   <li>
     <p>Click <strong>OK</strong> to save the settings.</p>
+  </li>
+</ol>
+
+<p>Next, we need to edit the port bindings on the default website so that they do not conflict with the one we just set up for rhino.compute (ie. port 80).</p>
+
+<ol>
+  <li>
+    <p>In the <strong>Connections</strong> pane, select the <strong>Default Web Site</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Actions</strong> pane, select <strong>Binding…</strong>.
+<img src="/wip/images/IIS_Setup_27.png" class="img-center" width="100%" /></p>
+  </li>
+  <li>
+    <p>In the <strong>Site Bindings</strong> dialog, select the row with the <strong>Type</strong> labeled <strong>http</strong>. Click the <strong>Edit</strong> button.
+<img src="/wip/images/IIS_Setup_28.png" class="img-center" width="70%" /></p>
+  </li>
+  <li>
+    <p>In the <strong>Edit Site Bindings</strong> dialog, change the <strong>Port</strong> number to <strong>8080</strong>. This number is arbitrary and can be any other valid port identifier other than 80.
+<img src="/wip/images/IIS_Setup_29.png" class="img-center" width="70%" /></p>
+  </li>
+  <li>
+    <p>Click <strong>Close</strong> on the <strong>Site Bindings</strong> dialog.</p>
+  </li>
+</ol>
+
+<p>Lastly, you may need to restart the IIS server and/or RhinoCompute site for the changes to go into effect.</p>
+
+<ol>
+  <li>
+    <p>In the <strong>Connections</strong> pane, select the <strong>RhinoComputeVM</strong> root server (one level up from the <strong>Application Pools</strong> and <strong>Sites</strong>).</p>
+  </li>
+  <li>
+    <p>In the <strong>Actions</strong> pane, select <strong>Restart</strong>.</p>
+  </li>
+  <li>
+    <p>After the server has been restarted, select the <strong>RhinoCompute</strong> site in the <strong>Connections</strong> pane.</p>
+  </li>
+  <li>
+    <p>In the <strong>Actions</strong> pane, under the <strong>Manage Website</strong> heading, select <strong>Restart</strong>.</p>
   </li>
 </ol>
 
@@ -1132,9 +1075,9 @@ At this point, you should have a folder on your machine labeled <strong>compute-
 
 <h2 id="testing-the-app">Testing the app</h2>
 
-<p>At this point, IIS should be configured to launch the rhino.compute instance when an API request is made. You can test this by opening a web browser on your local machine (not the VM) and typing in “http://” followed by the IP address of the virtual machine followed by a <code>:</code> and the port number (81) followed by “/activechildren”. So, the full address would look something like this:</p>
+<p>At this point, IIS should be configured to launch the rhino.compute instance when an API request is made. You can test this by opening a web browser on your local machine (not the VM) and typing in “http://” followed by the IP address of the virtual machine followed by a <code>:</code> and the port number (80) followed by “/activechildren”. So, the full address would look something like this:</p>
 
-<pre><code>http://52.168.38.105:81/activechildren
+<pre><code>http://52.168.38.105:80/activechildren
 </code></pre>
 
 <p>The <code>/activechildren</code> endpoint will return an integer value for the number of child processes that were started by rhino.compute (the default is 4).</p>
