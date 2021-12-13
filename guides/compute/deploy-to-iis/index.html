@@ -417,21 +417,12 @@ $(document).ready(function()
             
             
             <li>
-              <a href="#creating-a-vm">Creating a VM</a>
+              <a href="#create-the-vm">Create the VM</a>
 
               
                 <ul class="nav nav-stacked">
                   
 
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="#azure-settings">Azure Settings</a>
-                    </li>
                   
                     
                     
@@ -621,7 +612,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/authors/andy_payne">Andy Payne</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/compute/deploy-to-iis.md" target="_blank">10 Dec 2021</a>)
+      by <a href="/authors/andy_payne">Andy Payne</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/compute/deploy-to-iis.md" target="_blank">13 Dec 2021</a>)
     
   </span>
 
@@ -642,65 +633,24 @@ $(document).ready(function()
 <p><img src="/images/IIS_Request.png" class="img-center" width="100%" /></p>
 <figcaption align="left"><b>Fig.1 - A flow diagram showing how IIS recieves an incoming request and launches rhino.compute.exe which in turn spins up child processes.</b></figcaption>
 
-<h2 id="creating-a-vm">Creating a VM</h2>
+<h2 id="create-the-vm">Create the VM</h2>
 
-<p>In this guide, we will walk through the process of setting up a virtual machine using Azure services. If you are configuring a VM on a different platform (ie. AWS), the settings should be similar, although the user interface and process may vary.</p>
+<p>The first step in the process of deploying <strong>rhino.compute</strong> to a remote instance is to set up a virtual machine (VM). There are several popular services which can be configured to setup a wide array of virtual machines depending on your resource needs. Two of the most prominent providers include <a href="https://azure.microsoft.com/en-us/free/virtual-machines/">Azure</a> and <a href="https://aws.amazon.com/ec2/instance-types/">AWS</a>.</p>
 
-<p>To start, please confirm that you have a valid Azure subscription and that you have already setup a resource group to hold the various resources for this instance. To learn more about setting up a resource group on Azure, <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal">visit this page</a>.</p>
+<p>Depending on your preferences, we recommend starting with an Azure or AWS VM. Use the following guides to walkthrough that process.</p>
 
-<h3 id="azure-settings">Azure Settings</h3>
-
-<ol>
+<ul>
   <li>
-    <p>Sign in to the Azure <a href="https://portal.azure.com/#home">portal</a>.</p>
+    <p><a href="https://developer.rhino3d.com/guides/compute/creating-an-Azure-VM">Create a Virtual Machine on Azure</a>.</p>
   </li>
   <li>
-    <p>Type <strong>virutal machines</strong> in the search bar.</p>
+    <p>Create a Virtual Machine on AWS (coming soon).</p>
   </li>
-  <li>
-    <p>Under <strong>Services</strong>, select <strong>Virtual machines</strong>.</p>
-  </li>
-  <li>
-    <p>In the <strong>Virtual machines</strong> page, select <strong>Create</strong> then <strong>Virtual Machine</strong></p>
-  </li>
-  <li>
-    <p>In the <strong>Basics</strong> tab, under <strong>Project details</strong>, make sure the correct Subscription and Resource group are selected.</p>
-  </li>
-  <li>
-    <p>Under <strong>Instance details</strong>, create a unique name for the virutal machine. We’ll use <em>Rhino-Compute-VM</em> for our VM name. Select a region close to you, and then select <em>Windows Server 2022 Datacenter - Azure Edition Gen2</em> for the <strong>Image</strong>. Feel free to select any <strong>Size</strong> VM that fits your needs. We’ll use <em>Standard DS2_v2</em> for this example. Leave the other defaults.
-<img src="/images/Azure_VM_Create3.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Under <strong>Administrator account</strong>, provide a username and a password. Take note of these credentials as we will use these when we log into the remote machine.</p>
-  </li>
-  <li>
-    <p>Under <strong>Inbound port rules</strong>, choose <strong>Allow selected ports</strong> then select <strong>RDP (3389)</strong>, <strong>HTTPS (443)</strong>, and <strong>HTTP (80)</strong>.
-<img src="/images/Azure_VM_Create4.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Select <strong>Next : Disk &gt;</strong>.</p>
-  </li>
-  <li>
-    <p>Select <strong>Next : Networking &gt;</strong>.</p>
-  </li>
-  <li>
-    <p>Under the <strong>Network interface</strong> section, click on the <em>Create new</em> button under the <strong>Public IP</strong> subsection.</p>
-  </li>
-  <li>
-    <p>When the pop-out blade opens up, select <strong>Static</strong> under the Assignment tab. Click <strong>OK</strong> to save this setting.
-<img src="/images/Azure_VM_Create5.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Leave all other defaults. Select <strong>Review + create</strong>.</p>
-  </li>
-  <li>
-    <p>Once your configuration passes the validation check, select <strong>Create</strong> to deploy your virtual machine.</p>
-  </li>
-</ol>
+</ul>
 
 <h3 id="add-an-inbound-port-rule">Add an inbound port rule</h3>
 
-<p>Once your virtual machine has been deployed you should be able to go to the resources home page. Here, you can change various settings and configurations. We are going to add an inbound port rule so that we can send API requests on a dedicated port.</p>
+<p>Once your virtual machine has been deployed you should be able to go to the resource home page. Here, you can change various settings and configurations. We are going to add an inbound port rule so that we can send API requests on a dedicated port.</p>
 
 <p>By default, Azure denies and blocks all public inbound traffic - which also includes ICMP traffic. This is a good thing since it improves security by reducing the attack surface. The <a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol">Internet Control Message Protocol (ICMP)</a> is typically used for diagnostics and to troubleshoot networking issues.</p>
 
