@@ -6,21 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Deployment to a Virtual Machine running IIS with C#, VB</title>
-  <meta name="description" content="How to deploy compute for production on a virtual machine running Internet Information Services (IIS).  Using C#, VB">
+  <title>Deployment to Production Servers with C#, VB</title>
+  <meta name="description" content="How to deploy rhino compute for production on a machine running Internet Information Services (IIS).  Using C#, VB">
 
   <!-- OpenGraph for Facebook, Twitter, Slack unfurling -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="/guides/compute/deploy-to-iis/" />
-  <meta property="og:title" content="Deployment to a Virtual Machine running IIS" />
-  <meta property="og:description" content="How to deploy compute for production on a virtual machine running Internet Information Services (IIS)." />
+  <meta property="og:title" content="Deployment to Production Servers" />
+  <meta property="og:description" content="How to deploy rhino compute for production on a machine running Internet Information Services (IIS)." />
   <meta property=”og:site_name” content="developer.rhino3d.com"/>
   <meta property=”og:image” content="http://developer.rhino3d.com/images/rhinodev-logo-unfurl.png"/>
 
   <!-- twitter card tags additive with the og: tags -->
   <meta name="twitter:domain" value="developer.rhino3d.com" />
-  <meta name="twitter:title" value="Deployment to a Virtual Machine running IIS" />
-  <meta name="twitter:description" value="How to deploy compute for production on a virtual machine running Internet Information Services (IIS)." />
+  <meta name="twitter:title" value="Deployment to Production Servers" />
+  <meta name="twitter:description" value="How to deploy rhino compute for production on a machine running Internet Information Services (IIS)." />
   
     <meta name="twitter:image" content="http://developer.rhino3d.com/images/rhinodev-logo-unfurl.png" />
   
@@ -303,6 +303,14 @@ $(document).ready(function()
           
         
           
+            
+              
+                
+              
+            
+          
+        
+          
         
           
             
@@ -425,6 +433,22 @@ $(document).ready(function()
             
             
             <li>
+              <a href="#prerequisites">Prerequisites</a>
+
+              
+
+            </li>
+          
+
+        
+          
+
+          
+            
+            
+            
+            
+            <li>
               <a href="#create-the-vm">Create the VM</a>
 
               
@@ -457,108 +481,8 @@ $(document).ready(function()
             
             
             <li>
-              <a href="#configuring-the-vm">Configuring the VM</a>
+              <a href="#running-the-bootstrap-script">Running the Bootstrap script</a>
 
-              
-                <ul class="nav nav-stacked">
-                  
-
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="#open-firewall-port">Open Firewall Port</a>
-                    </li>
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="#install-rhino">Install Rhino</a>
-                    </li>
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="#install-iis">Install IIS</a>
-                    </li>
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="#install-net-core-hosting-bundle">Install .NET Core Hosting...</a>
-                    </li>
-                  
-
-                </ul>
-              
-
-            </li>
-          
-
-        
-          
-
-          
-            
-            
-            
-            
-            <li>
-              <a href="#publish-rhinocompute">Publish rhino.compute</a>
-
-              
-
-            </li>
-          
-
-        
-          
-
-          
-            
-            
-            
-            
-            <li>
-              <a href="#create-the-app-in-iis">Create the app in IIS</a>
-
-              
-                <ul class="nav nav-stacked">
-                  
-
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="#setup-the-app-pool--site">Setup the App Pool &amp; ...</a>
-                    </li>
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="#edit-permissions">Edit Permissions</a>
-                    </li>
-                  
-
-                </ul>
               
 
             </li>
@@ -605,19 +529,19 @@ $(document).ready(function()
               
           </ol>
 
-          <h1>Deployment to a Virtual Machine running IIS</h1>
+          <h1>Deployment to Production Servers</h1>
 
           <p>
   <span class="guide_byline">
     
       
-      by <a href="/wip/authors/andy_payne">Andy Payne</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/compute/deploy-to-iis.md" target="_blank">14 Dec 2021</a>)
+      by <a href="/wip/authors/andy_payne">Andy Payne</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/compute/deploy-to-iis.md" target="_blank">24 Jan 2022</a>)
     
   </span>
 
 </p>
 
-          <p>How to deploy compute for production on a virtual machine running Internet Information Services (IIS).</p>
+          <p>How to deploy rhino compute for production on a machine running Internet Information Services (IIS).</p>
 
           <h2 id="overview">Overview</h2>
 
@@ -632,9 +556,27 @@ $(document).ready(function()
 <p><img src="/wip/images/IIS_Request.png" class="img-center" width="100%" /></p>
 <figcaption align="left"><b>Fig.1 - A flow diagram showing how IIS recieves an incoming request and launches rhino.compute.exe which in turn spins up child processes.</b></figcaption>
 
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>Before running the bootstrap script on your server or virtual machine, you will need the following pieces of information.</p>
+
+<ul>
+  <li><strong><code>EmailAddress</code></strong> - The script will use this email to download a copy of Rhino to install. This is similar to the Rhino download page behavior.</li>
+  <li><strong><code>ApiKey</code></strong> - The API key is a string of text that is secret to your compute server and your applications that are using the compute API e.g. <code>b8f91f04-3782-4f1c-87ac-8682f865bf1b</code>. It is basically how the compute server ensures that the API calls are coming from your apps only. You can enter any string that is unique and secret to you and your compute apps. Make sure to keep this in a safe place.</li>
+  <li><strong><code>RhinoToken</code></strong> – This is a long token that identifies your instance of Rhino Compute to the core-hour billing system. Go to the <a href="https://www.rhino3d.com/licenses?_forceEmpty=true">Licenses Portal</a> to generate this unique id based on your license. See <a href="../core-hour-billing/#using-core-hour-billing">“Using Core-Hour Billing” guide</a> for more information.</li>
+</ul>
+
+<div class="alert alert-info" role="alert">
+Running rhino compute locally uses your existing Rhino license and does not cost any additional money (other than your initial rhino license investment). Running compute locally is the best option for development and testing and to find out more, read <a href="../development"><u>Running and Debugging Compute Locally</u></a>.<br /><br />
+
+However, when setting up a production environment you will need a server or virtual machine pre-installed with Windows Server 2019 or higher. Licensing works differently when running Rhino (ie. via Compute) in a production environment (ie. server-setting) and you will be charged at a rate of <strong>$0.10 per core per hour</strong>. <br /><br />
+
+Follow the <a href="../core-hour-billing"><u>"Core-Hour Billing" guide</u></a> to get set up. <b>This is important so do not skip.</b>
+</div>
+
 <h2 id="create-the-vm">Create the VM</h2>
 
-<p>The first step in the process of deploying <strong>rhino.compute</strong> to a remote instance is to set up a virtual machine (VM). There are several popular services which can be configured to setup a wide array of virtual machines depending on your resource needs. Two of the most prominent providers include <a href="https://azure.microsoft.com/en-us/free/virtual-machines/">Azure</a> and <a href="https://aws.amazon.com/ec2/instance-types/">AWS</a>.</p>
+<p>The first step in the process of deploying <strong>rhino.compute</strong> for production is to either setup a physical machine to act as a server or create a virtual machine (VM). For this guide, we will be using a virtual machine. There are several popular services which can be configured to setup a wide array of virtual machines depending on your resource needs. Two of the most prominent providers include <a href="https://azure.microsoft.com/en-us/free/virtual-machines/">Azure</a> and <a href="https://aws.amazon.com/ec2/instance-types/">AWS</a>.</p>
 
 <p>Depending on your preferences, we recommend starting with an Azure or AWS VM. Use the following guides to walkthrough that process.</p>
 
@@ -651,7 +593,7 @@ $(document).ready(function()
 
 <p>Now that we’ve configured the virtual machine, we need to be able to log onto it so that we can setup IIS and the rhino.compute instance. We’ll do this by using a remote desktop protocol (RDP) which connects two computers over a network.</p>
 
-<p>To start, let’s download the RDP file for our Azure VM.</p>
+<p>To start, let’s download the RDP file. We’ll use the Azure VM Portal but a similar process is used for AWS.</p>
 
 <ol>
   <li>
@@ -691,403 +633,26 @@ $(document).ready(function()
   </li>
 </ol>
 
-<p>Congratulations. You should now have access to the desktop of the remote machine running Windows Server 2022.</p>
+<p>Congratulations. You should now have access to the desktop of the remote machine running Windows Server 2019 or higher.</p>
 
-<h2 id="configuring-the-vm">Configuring the VM</h2>
-
-<p>Now that you have logged into the virtual machine via RDP, let’s take a look at how to setup Windows Server to host our instance of rhino.compute.</p>
-
-<h3 id="open-firewall-port">Open Firewall Port</h3>
-
-<p>We have already created an inbound port rule for the Azure network interface and the Windows firewall already has inbound port rules to allow HTTP traffic on port 80 and HTTPS traffic on port 443. However, we must also create a rule to allow ICMP messages through the Windows firewall.</p>
+<h2 id="running-the-bootstrap-script">Running the Bootstrap script</h2>
+<p>Assuming that you are now logged into the virtual machine (using RDP), follow the following steps to install rhino compute behind IIS.</p>
 
 <ol>
   <li>
-    <p>Launch <strong>Powershell</strong> (right-click to <strong>Run as Administrator</strong>).</p>
+    <p>Click on the Windows Start menu and type in “Powershell”. In the menu that appears, right-click on the <strong>Windows Powershell app</strong> and choose <strong>Run As Administrator</strong>.
+<img src="/wip/images/powershell_1.png" class="img-center" width="50%" /></p>
   </li>
   <li>
-    <p>Type in the following commands:</p>
+    <p><strong>Copy and paste</strong> the command below and hit <strong>Enter</strong>. This command will download the latest bootstrap script and install rhino compute on this machine. Note: you will be prompted to enter your <strong>Email</strong>, <strong>API Key</strong>, and <strong>Rhino Token</strong>, so please have that information handy.</p>
 
-    <pre><code> # For IPv4
- netsh advfirewall firewall add rule name="ICMP Allow incoming V4 echo request" protocol="icmpv4:8,any" dir=in action=allow
- 
- # For IPv6
- netsh advfirewall firewall add rule name="ICMP Allow incoming V6 echo request" protocol="icmpv6:8,any" dir=in action=allow 
+    <pre><code class="language-powershell">$F="/bootstrap.zip";$T="$($Env:temp)\tmp$([convert]::tostring((get-random 65535),16).padleft(4,'0')).tmp"; New-Item -ItemType Directory -Path $T; iwr -useb https://raw.githubusercontent.com/mcneel/compute.rhino3d/master/script/production/bootstrap.zip -outfile $T$F; Expand-Archive $T$F -DestinationPath $T; Remove-Item $T$F;&amp; "$T\boostrap_server.ps1" 
 </code></pre>
   </li>
   <li>
-    <p>You should see an <strong>OK</strong> message after each command.</p>
-  </li>
-  <li>
-    <p>Now, Restart your virtual machine.</p>
+    <p>At the end of the installation process, you should see the following message in the powershell window, <em>“Congratulations! All components have now been installed.”</em></p>
   </li>
 </ol>
-
-<p>You should be able to ping your Azure virtual machine using your public IP address. Note: your IP address will be different than the one shown below.
-<img src="/wip/images/Ping_IPAddress.png" class="img-center" width="85%" /></p>
-
-<h3 id="install-rhino">Install Rhino</h3>
-
-<p>Next we need to install Rhino on the virtual machine and setup core-hour billing.</p>
-
-<ol>
-  <li>
-    <p><a href="https://www.rhino3d.com/download/rhino-for-windows/7/latest">Download the Rhino 7.0</a>.</p>
-  </li>
-  <li>
-    <p><a href="https://developer.rhino3d.com/guides/compute/core-hour-billing/">Follow this guide</a> for setting up core-hour billing on the virtual machine.</p>
-  </li>
-</ol>
-
-<h3 id="install-iis">Install IIS</h3>
-
-<p>By default, IIS is not enabled on Windows Server. To install IIS on the virtual machine, follow these steps.</p>
-
-<ol>
-  <li>
-    <p>Open the <strong>Server Manager</strong> console. This usually opens by default after startup, however if its not there, click on the <strong>Start</strong> menu and search for <em>Server Manager</em>.</p>
-  </li>
-  <li>
-    <p>Click the <strong>Add roles and features</strong> button.
-<img src="/wip/images/IIS_Setup_1.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>Next</strong> on the <strong>Before you begin</strong> page</p>
-  </li>
-  <li>
-    <p>On the <strong>Installation type</strong> page, select <strong>Role-based or feature-based installation</strong>.
-<img src="/wip/images/IIS_Setup_2.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>We will be installing IIS on this local machine, so leave <strong>Select a server from the server pool</strong> checked.</p>
-  </li>
-  <li>
-    <p>Click <strong>Next</strong>.
-<img src="/wip/images/IIS_Setup_3.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>On the <strong>Select server roles</strong> page, check the box next to <strong>Web Server (IIS)</strong>. A pop-up dialog will be opened advising that additional features are required. Click the <strong>Add Features</strong> button to install these as well.</p>
-  </li>
-  <li>
-    <p>Click <strong>Next</strong>.
-<img src="/wip/images/IIS_Setup_4.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>On the <strong>Select features</strong> page, add all of the checkboxes under the <strong>.NET Framework 4.8 Features</strong>. Then scroll down and make sure the <strong>IIS Hostable Web Core</strong> checkbox is checked. Click Next.
-<img src="/wip/images/IIS_Setup_18.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>On the <strong>Select role services</strong> page, review the available features that are available. For now, we will simply leave the default selections, but you can always come back and add more later.</p>
-  </li>
-  <li>
-    <p>Click <strong>Next</strong>.
-<img src="/wip/images/IIS_Setup_6.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Finally, on the <strong>Confirmation</strong> page, review the items that are going to be installed on the VM. When satisfied, click the <strong>Install</strong> button. Note, no reboot should be required with a standard IIS installation. However, if you remove the role a reboot will be needed.
-<img src="/wip/images/IIS_Setup_7.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Once the installation has succeeded, click the <strong>Close</strong> button. At this point, IIS should be running on port 80 (by default).
-<img src="/wip/images/IIS_Setup_8.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>You can now open the <strong>IIS Manager</strong> app by clicking on the Windows <strong>Start</strong> menu and searching for *IIS Manager**. This will launch the IIS Manager console app. We won’t do anything in the IIS Manager just yet, but you should be able to confirm that IIS is now operational on the VM.
-<img src="/wip/images/IIS_Setup_9.png" class="img-center" width="100%" /></p>
-  </li>
-</ol>
-
-<h3 id="install-net-core-hosting-bundle">Install .NET Core Hosting Bundle</h3>
-
-<p>The first thing we need to do is install the <em>.NET Core Hosting Bundle</em> on the VM in order to run rhino.compute (an ASP.NET Core app) on the VM. The bundle installs the .NET Core Runtime, .Net Core Library, and the ASP.NET Core Module which allows ASP.NET Core apps to run behind IIS. Before we can install the .NET Core Hosting Bundle, we need to make sure the</p>
-
-<ol>
-  <li>
-    <p>Download the <a href="https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-aspnetcore-5.0.12-windows-hosting-bundle-installer">.NET Core Hosting Bundle (direct download)</a> Note: Rhino.compute currently targets the .NET Core 5.0 Framework.</p>
-  </li>
-  <li>
-    <p>Restart your virtual machine.</p>
-  </li>
-</ol>
-
-<h2 id="publish-rhinocompute">Publish rhino.compute</h2>
-
-<p>The next step in the process will be to publish the <code>rhino.compute</code> and <code>compute.geometry</code> projects. In order to do this, you will need to have the <a href="https://visualstudio.microsoft.com/">Visual Studio 2019 IDE</a> and <a href="https://git-scm.com/downloads">Git</a> installed on your machine.</p>
-
-<p>You have two options as to where you can install these applications. You can either install these on virtual machine and publish the rhino.compute applications locally, or you can install these on a different machine and then copy/paste the published files over to the VM. In this walkthrough, I will choose the later approach.</p>
-
-<ol>
-  <li>
-    <p>Go to <a href="https://github.com/mcneel/compute.rhino3d">https://github.com/mcneel/compute.rhino3d</a> and clone the repo to a directory on your machine. To do this:</p>
-
-    <ul>
-      <li>Open <strong>Powershell</strong> and navigate to a directory where you want to clone the repository.</li>
-      <li>Type <code>$ git clone https://github.com/mcneel/compute.rhino3d.git compute</code> into the terminal.</li>
-      <li>Press <strong>Enter</strong> to create a local clone of the rhino.compute repo on your machine.</li>
-    </ul>
-  </li>
-  <li>
-    <p>Next, launch <strong>Visual Studio</strong></p>
-  </li>
-  <li>
-    <p>Choose <strong>Open a Project or Solution</strong> and navigate to the directory where you cloned the repo, then choose the <strong>src</strong> subfolder. Choose the <strong>compute.sln</strong> file and choose <strong>Open</strong>.</p>
-  </li>
-  <li>
-    <p>In the <strong>Solution Explorer</strong> you should see two projects. One is called <strong>rhino.compute</strong> and the other <strong>compute.geometry</strong>. Right-click on the <strong>rhino.compute</strong> project and select <strong>Publish</strong> from the menu.
-<img src="/wip/images/Compute_Publish_2.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>A new <strong>Publish</strong> dialog will be opened. For the <strong>Target</strong> choose the <strong>Folder</strong> option.
-<img src="/wip/images/Compute_Publish_3.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Next you will be asked for a directory to save all of the published files. You can choose any location but I have created a directory called <em>compute-for-IIS</em>. Inside this folder, I’ve created two subfolders called <em>rhino.compute</em> and <em>compute.geometry</em>. Select the <em>rhino.compute</em> subfolder as the target location to save the files. 
-<img src="/wip/images/Compute_Publish_4.png" class="img-center" width="100%" />
-Your folder structure looks like this:</p>
-
-    <pre><code> * compute-for-IIS
-     * rhino.compute
-     * compute.geometry
-</code></pre>
-  </li>
-  <li>
-    <p>Click <strong>Finish</strong>.</p>
-  </li>
-  <li>
-    <p>Back in the Visual Studio <strong>Publish</strong> window, select <strong>Show all settings</strong>.
-<img src="/wip/images/Compute_Publish_5.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>In the <strong>Publish</strong> setting dialog, select <strong>Settings</strong>. Make sure that the <strong>Configuration</strong> is set to <em>Release</em>, <strong>Deployment Mode</strong> is set to <em>Self-contained</em>, and the <strong>Target Runtime</strong> is set to <em>win-x64</em>. Leave all other defaults.</p>
-  </li>
-  <li>
-    <p>Click <strong>Save</strong>.
-<img src="/wip/images/Compute_Publish_6.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Click the <strong>Publish</strong> button to begin the process of saving the rhino.compute project to the target directory.
-<img src="/wip/images/Compute_Publish_7.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Now, we have to go through a similar process to publish all of the files for the compute.geometry project. This time, right-click on the <strong>compute.geometry</strong> project in the <strong>Solution Explorer</strong> and select <strong>Publish</strong>.
-<img src="/wip/images/Compute_Publish_8.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>Choose <strong>Folder</strong> as the <strong>Target</strong> type, just like in step 5.</p>
-  </li>
-  <li>
-    <p>This time, set the <em>compute.geometry</em> subfolder that you created in step 6.</p>
-  </li>
-  <li>
-    <p>Click <strong>Finish</strong>.
-<img src="/wip/images/Compute_Publish_9.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>We can leave all of the other configuration settings to their defaults. Click <strong>Publish</strong> to save the files to the target directory.</p>
-  </li>
-</ol>
-
-<p><br />
-At this point, you should have a folder on your machine labeled <strong>compute-for-IIS</strong>. Inside that folder, you should have two subfolders each of which contain a number of files. Next, we need to copy those two subfolders over to a directory on the virtual machine.</p>
-
-<p>If you aren’t already logged into your virtual machine through the <strong>Remote Desktop Connection</strong> app, please do so now.</p>
-
-<p>When we installed IIS on the virtual machine, it created a folder called <em>inetpub</em> on the <em>C:\</em> drive.</p>
-
-<p>The folder structure looks like this:</p>
-
-<pre><code>* C:\inetpub
-    * custerr
-    * history
-    * logs
-    * temp
-    * wwwroot
-        * aspnet_client
-            * system_web
-                *4_0_30319   &lt;- copy/paste rhino.compute and compute.geometry folders here 
-</code></pre>
-
-<p>We need to copy/paste the contents of the <strong>compute-for-IIS</strong> folder (the two subfolders) into the <strong>4_0_30319</strong> directory.</p>
-
-<p><img src="/wip/images/Compute_Publish_11.png" class="img-center" width="100%" /></p>
-
-<p>In the next step, we will create an IIS application and point it to this directory in order to launch an instance of rhino.compute when it receives an API request.</p>
-
-<h2 id="create-the-app-in-iis">Create the app in IIS</h2>
-
-<h3 id="setup-the-app-pool--site">Setup the App Pool &amp; Site</h3>
-
-<p>Our next step will be to create an application in IIS and link it to the rhino.compute directory. To start we’ll need to create a new <strong>app pool</strong> in IIS.</p>
-
-<ol>
-  <li>
-    <p>Select the Windows <strong>Start</strong> button and type <em>IIS</em> in the search bar. Click on the <strong>Internet Information Services (IIS) Manager</strong> app to launch the IIS Manager.</p>
-  </li>
-  <li>
-    <p>In the <strong>Connections</strong> pane on the left-hand side of the IIS Manager you should see two items: 1) Start Page and 2) Rhino-Compute-VM (or whatever you named your virtual machine). Click on the carat to the left of the VM name to expand the submenu.</p>
-  </li>
-  <li>
-    <p>Select the <strong>Application Pools</strong> submenu item.</p>
-  </li>
-  <li>
-    <p>In the <strong>Actions</strong> pane on the far right, click the <strong>Add Application Pool</strong> button.
-<img src="/wip/images/IIS_Setup_10.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>In the <strong>Add Application Pool</strong> dialog, type <em>RhinoComputeAppPool</em> in the <strong>Name</strong> input. Set the <strong>.NET CLR version</strong> to <strong>No Managed Code</strong>. Leave all other defaults.</p>
-  </li>
-  <li>
-    <p>Click <strong>OK</strong> to add the new app pool.
-<img src="/wip/images/IIS_Setup_11.png" class="img-center" width="45%" /></p>
-  </li>
-  <li>
-    <p>Under the <strong>Actions</strong> pane, click <strong>Advanced Settings</strong>.
-<img src="/wip/images/IIS_Setup_12.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>In the <strong>Advanced Settings</strong> dialog, scroll down to the <strong>Process Model</strong> section. Change the <strong>Load User Profile</strong> to <strong>True</strong>.
-<img src="/wip/images/IIS_Setup_23.png" class="img-center" width="65%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>OK</strong> to close the <strong>Advanced Settings</strong> dialog.</p>
-  </li>
-  <li>
-    <p>Now, in the <strong>Connections</strong> pane, click on the <strong>Sites</strong> menu item.</p>
-  </li>
-  <li>
-    <p>In the <strong>Actions</strong> pane, select <strong>Add Website</strong>.
-<img src="/wip/images/IIS_Setup_16.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>In the <strong>Add Website</strong> dialog, set the <strong>Site name</strong> to <strong>Rhino.Compute</strong>.</p>
-  </li>
-  <li>
-    <p>Click the <strong>Select</strong> button and set the <strong>Application Pool</strong> to <strong>RhinoComputeAppPool</strong>.</p>
-  </li>
-  <li>
-    <p>Click the <strong>ellipsis</strong> button next to the <strong>Physical path</strong> and select the <strong>rhino.compute</strong> directory (ie. C:\inetpub\wwwroot\compute-for\IIS\rhino.compute).</p>
-  </li>
-  <li>
-    <p>Under the <strong>Binding</strong> section, type <strong>80</strong> to bind the application to incoming messages on port 80. For now, leave the binding type to <strong>http</strong>.
-<img src="/wip/images/IIS_Setup_17.png" class="img-center" width="80%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>OK</strong> to create the site.</p>
-  </li>
-  <li>
-    <p>At this point, you may see a popup that says you are trying to use the same binding as another site. This is because the <strong>Default Site</strong> that IIS set up during the initial configuration is also bound on port 80. Click <strong>Yes</strong> and we will edit the binding on the Default Site in a minute.
-<img src="/wip/images/IIS_Setup_26.png" class="img-center" width="60%" /></p>
-  </li>
-  <li>
-    <p>Next, under the <strong>Actions</strong> pane, click <strong>Advanced Settings</strong>.
-<img src="/wip/images/IIS_Setup_24.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>In the <strong>Advanced Settings</strong> dialog, under the <strong>General</strong> section, click on the <strong>elipsis</strong> button to set the <strong>Physical Path Credentials</strong>.
-<img src="/wip/images/IIS_Setup_20.png" class="img-center" width="65%" /></p>
-  </li>
-  <li>
-    <p>In the <strong>Connect As</strong> dialog, select <strong>Specific user</strong>. Then click the <strong>Set</strong> button to add your administrator credentials.
-<img src="/wip/images/IIS_Setup_21.png" class="img-center" width="60%" /></p>
-  </li>
-  <li>
-    <p>Enter the <strong>Username</strong> and <strong>Password</strong> associated with your administrator account. Hint: this should be the same username and password that you set in <a href="https://developer.rhino3d.com/guides/compute/deployToIIS/#creating-a-vm">step 7 when setting up Azure virtual machine</a>.
-<img src="/wip/images/IIS_Setup_22.png" class="img-center" width="50%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>OK</strong> To save the credentials.</p>
-  </li>
-  <li>
-    <p>Click <strong>OK</strong> to save the user information.</p>
-  </li>
-  <li>
-    <p>In the <strong>Advanced Settings</strong> dialog, change the <strong>Preload Enabled</strong> value to <strong>True</strong>.
-<img src="/wip/images/IIS_Setup_25.png" class="img-center" width="65%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>OK</strong> to save the settings.</p>
-  </li>
-</ol>
-
-<p>Next, we need to edit the port bindings on the default website so that they do not conflict with the one we just set up for rhino.compute (ie. port 80).</p>
-
-<ol>
-  <li>
-    <p>In the <strong>Connections</strong> pane, select the <strong>Default Web Site</strong>.</p>
-  </li>
-  <li>
-    <p>In the <strong>Actions</strong> pane, select <strong>Binding…</strong>.
-<img src="/wip/images/IIS_Setup_27.png" class="img-center" width="100%" /></p>
-  </li>
-  <li>
-    <p>In the <strong>Site Bindings</strong> dialog, select the row with the <strong>Type</strong> labeled <strong>http</strong>. Click the <strong>Edit</strong> button.
-<img src="/wip/images/IIS_Setup_28.png" class="img-center" width="70%" /></p>
-  </li>
-  <li>
-    <p>In the <strong>Edit Site Bindings</strong> dialog, change the <strong>Port</strong> number to <strong>8080</strong>. This number is arbitrary and can be any other valid port identifier other than 80.
-<img src="/wip/images/IIS_Setup_29.png" class="img-center" width="70%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>Close</strong> on the <strong>Site Bindings</strong> dialog.</p>
-  </li>
-</ol>
-
-<p>Lastly, you may need to restart the IIS server and/or RhinoCompute site for the changes to go into effect.</p>
-
-<ol>
-  <li>
-    <p>In the <strong>Connections</strong> pane, select the <strong>RhinoComputeVM</strong> root server (one level up from the <strong>Application Pools</strong> and <strong>Sites</strong>).</p>
-  </li>
-  <li>
-    <p>In the <strong>Actions</strong> pane, select <strong>Restart</strong>.</p>
-  </li>
-  <li>
-    <p>After the server has been restarted, select the <strong>RhinoCompute</strong> site in the <strong>Connections</strong> pane.</p>
-  </li>
-  <li>
-    <p>In the <strong>Actions</strong> pane, under the <strong>Manage Website</strong> heading, select <strong>Restart</strong>.</p>
-  </li>
-</ol>
-
-<h3 id="edit-permissions">Edit Permissions</h3>
-
-<p>The next thing we have to do is edit the permissions of the <strong>rhino.compute</strong> and <strong>compute.geometry</strong> subfolders. Open the <strong>File Explorer</strong> and navigate to those subfolders (Hint: they should be located in C:\inetpub\wwwroot\aspnet_client\system_web\4_0_30319).</p>
-
-<ol>
-  <li>
-    <p>Right-click on the <strong>rhino.compute</strong> folder and click <strong>Properties</strong>.</p>
-  </li>
-  <li>
-    <p>Click on the <strong>Security</strong> tab and then click <strong>Edit</strong>.
-<img src="/wip/images/Edit_Permissions_1.png" class="img-center" width="55%" /></p>
-  </li>
-  <li>
-    <p>For each group or user name, provide <strong>Full control</strong> access.</p>
-  </li>
-  <li>
-    <p>Next, click the <strong>Add</strong> button.
-<img src="/wip/images/Edit_Permissions_2.png" class="img-center" width="55%" /></p>
-  </li>
-  <li>
-    <p>Under the section titled <strong>Enter the object names to select</strong>, type in <strong>IIS AppPool\RhinoComputeAppPool</strong>. Then, click on the <strong>Check Names</strong> button to verify the name.
-<img src="/wip/images/Edit_Permissions_3.png" class="img-center" width="70%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>OK</strong>.</p>
-  </li>
-  <li>
-    <p>Back in the <strong>Security</strong> tab, make sure the RhinoComputeAppPool object is select. Then check <strong>Full control</strong> to give full access to this app pool.
-<img src="/wip/images/Edit_Permissions_4.png" class="img-center" width="55%" /></p>
-  </li>
-  <li>
-    <p>Click <strong>Apply</strong> to modify the permissions.</p>
-  </li>
-  <li>
-    <p>Click <strong>OK</strong> to close the dialog.</p>
-  </li>
-</ol>
-
-<p>Now, follow the same steps to provide <strong>Full control</strong> access to the <strong>compute.geometry</strong> folder.</p>
 
 <h2 id="testing-the-app">Testing the app</h2>
 
@@ -1117,8 +682,11 @@ At this point, you should have a folder on your machine labeled <strong>compute-
     <p>Click on the <strong>Solver</strong> tab in the left-hand menu.</p>
   </li>
   <li>
-    <p>In the <strong>Hops - Compute server URLs</strong> section, type in the web address from above (do not include the <code>/activechildren</code> endpoint). Your URL should look something like this.
-<img src="/wip/images/Hops_To_IIS_1.png" class="img-center" width="80%" /></p>
+    <p>In the <strong>Hops - Compute server URLs</strong> section, type in the web address from above (do not include the <code>/activechildren</code> endpoint). Your URL should look something like this.</p>
+  </li>
+  <li>
+    <p>In the <strong>API Key</strong> section, enter the API Key that you saved in the <a href="../deploy-to-iis/#prerequisites">Prerequisites</a> section.
+<img src="/wip/images/Hops_To_IIS_4.png" class="img-center" width="80%" /></p>
   </li>
   <li>
     <p>Add a <strong>Hops</strong> component to the <strong>Grasshopper canvas</strong> (Params/Util)</p>
@@ -1129,7 +697,7 @@ At this point, you should have a folder on your machine labeled <strong>compute-
   </li>
 </ol>
 
-<p>Once the path is set, the Hops component will create the appropriate API request and send it to the URL that we specified in step 6 (the rhino.compute server running on IIS). The compute server processes the request and send a response back to Hops, which returns the result.
+<p>Once the path is set, the Hops component will create the appropriate API request and sends it to the URL that we specified in step 6 (the rhino.compute server running on IIS). The compute server processes the request and sends a response back to Hops, which returns the result.
 <img src="/wip/images/Hops_To_IIS_3.png" class="img-center" width="70%" /></p>
 
 <p>Congratulations! You have successfully setup an instance of rhino.compute running behind IIS on a virtual machine.</p>
@@ -1178,7 +746,7 @@ At this point, you should have a folder on your machine labeled <strong>compute-
         </div>
 
         <div class="row text-center">
-          © 1997 - 2021 Robert McNeel &amp; Associates<br/>
+          © 1997 - 2022 Robert McNeel &amp; Associates<br/>
           <span class="glyphicon glyphicon-heart-empty"></span>&nbsp;<a href="/wip/authors">Contributions welcome</a>
         </div>
 
