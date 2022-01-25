@@ -656,7 +656,7 @@ $(document).ready(function()
         
         <a href="/authors/andy_payne">Andy Payne</a>
         
-           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/compute/hops-component.md" target="_blank">15 Dec 2021</a>)
+           (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/compute/hops-component.md" target="_blank">25 Jan 2022</a>)
     
   </span>
 
@@ -771,10 +771,11 @@ $(document).ready(function()
 
 <p>The Hops settings control how Hops runs on an application level.  It is available through the Grasshopper File pulldown &gt; Preferences.</p>
 
-<p><img src="/images/gh-hops-preferences.jpg" class="img-center" width="60%" /></p>
+<p><img src="/images/gh-hops-preferences.png" class="img-center" width="60%" /></p>
 
 <ul>
   <li><strong>Hops-Compute server URL</strong> - List the IP address or URL of any remote machines or Compute servers.</li>
+  <li><strong>API Key</strong> - The API key is a string of text that is secret to your compute server and your applications that are using the compute API e.g. <code>b8f91f04-3782-4f1c-87ac-8682f865bf1b</code>. It is optional if you are testing locally, but should be used in a production environment. It is basically how the compute server ensures that the API calls are coming from your apps only. You can enter any string that is unique and secret to you and your compute apps. Make sure to keep this in a safe place.</li>
   <li><strong>Max Concurrent requests</strong> - Used to limit the number of active requests in asynchronous situations. This way hops doesn’t make thousands of requests while the original request is being processed.</li>
   <li><strong>Clear Hops Memory cache</strong> - Clears all previously stored solutions from memory.</li>
   <li><strong>Hide Rhino.Compute Console Window</strong> - Hops will solve in the background, but showing the window can be helpful for troubleshooting.</li>
