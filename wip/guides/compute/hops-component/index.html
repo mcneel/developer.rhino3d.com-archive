@@ -536,22 +536,6 @@ $(document).ready(function()
               <a href="#remote-machine-configuration">Remote Machine Configuration</a>
 
               
-                <ul class="nav nav-stacked">
-                  
-
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="#setting-up-hops-to-communicate-with-the-remote-machine">Setting up Hops to commun...</a>
-                    </li>
-                  
-
-                </ul>
-              
 
             </li>
           
@@ -795,41 +779,9 @@ $(document).ready(function()
 
 <h2 id="remote-machine-configuration">Remote Machine Configuration</h2>
 
-<p>By default Hops will use the local computer to solve Grasshopper functions. It is possible to setup remote computers for Hops to call.</p>
+<p>By default Hops will use your local computer to solve Grasshopper functions. However, it is possible to setup remote computers (ie. servers) or virtual machines for Hops to call.</p>
 
-<p>Remote machines must be running Windows and have Rhino installed on them.</p>
-
-<p><strong>Configuring a remote machine as a Hops node:</strong></p>
-
-<ol>
-  <li>Install Rhino 7.5 or above on the remote computer.</li>
-  <li>Make sure Rhino runs and is properly licensed.</li>
-  <li>Get the very latest version of compute.geometry.exe. Either build it yourself or get build from our CI server at
-<a href="https://ci.appveyor.com/project/mcneel/compute-rhino3d/branch/master/artifacts">https://ci.appveyor.com/project/mcneel/compute-rhino3d/branch/master/artifacts</a></li>
-  <li>Run compute.geometry.exe from an Administrator Command Line with an address parameter. For example
-‘compute.geometry.exe -address http://192.168.1.6:6123’. 192.168.1.6 is your computer’s address. The port can be any you want; but we tend to use values above 6000.</li>
-  <li>Note the IP address of the remote machine.</li>
-</ol>
-
-<p><strong>To test the status of the remote machine:</strong></p>
-
-<ol>
-  <li>On another computer, open a browser and enter <code>http://192.168.1.6:6123/healthcheck</code>. Use the IP and port numbers entered in the above steps.</li>
-</ol>
-
-<p>If you get the word “healthy” back, you are all set up.</p>
-
-<h3 id="setting-up-hops-to-communicate-with-the-remote-machine">Setting up Hops to communicate with the remote machine</h3>
-<p>In the Grasshopper preferences &gt; Solver &gt; Hops - Compute Server URLs enter the IP and port of each remote computer.  For the above example enter:
-http://192.168.1.6:6123</p>
-
-<p><strong>Video Tutorial:</strong></p>
-
-<div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="https://player.vimeo.com/video/537494700?title=0&amp;byline=0&amp;badge=0&amp;portrait=0"></iframe>
-</div>
-
-<p><br /></p>
+<p>In order to make API calls to a remote machine, please follow this <a href="../deploy-to-iis/">guide on setting up a production environment</a>.</p>
 
 <h2 id="calling-a-cpython-server">Calling a CPython Server</h2>
 
