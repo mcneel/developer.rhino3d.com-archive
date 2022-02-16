@@ -527,7 +527,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/wip/authors/andy_payne">Andy Payne</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/compute/deploy-to-iis.md" target="_blank">14 Feb 2022</a>)
+      by <a href="/wip/authors/andy_payne">Andy Payne</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/compute/deploy-to-iis.md" target="_blank">16 Feb 2022</a>)
     
   </span>
 
@@ -648,14 +648,7 @@ Follow the <a href="../core-hour-billing"><u>"Core-Hour Billing" guide</u></a> t
 
 <h2 id="testing-the-app">Testing the app</h2>
 
-<p>At this point, IIS should be configured to launch the rhino.compute instance when an API request is made. You can test this by opening a web browser on your local machine (not the VM) and typing in “http://” followed by the IP address of the virtual machine followed by a <code>:</code> and the port number (80) followed by “/activechildren”. So, the full address would look something like this:</p>
-
-<pre><code>http://52.168.38.105:80/activechildren
-</code></pre>
-
-<p>The <code>/activechildren</code> endpoint will return an integer value for the number of child processes that were started by rhino.compute (the default is 4).</p>
-
-<p>If you’ve succeeded in returning a numeric value larger than zero, then at least one child process has been started. Next, let’s try getting Hops to send a definition to that URL.</p>
+<p>At this point, IIS should be configured to launch the rhino.compute instance when an API request is made. Let’s try getting Hops to send a definition to our virtual machine’s URL.</p>
 
 <ol>
   <li>
@@ -674,7 +667,10 @@ Follow the <a href="../core-hour-billing"><u>"Core-Hour Billing" guide</u></a> t
     <p>Click on the <strong>Solver</strong> tab in the left-hand menu.</p>
   </li>
   <li>
-    <p>In the <strong>Hops - Compute server URLs</strong> section, type in the web address from above (do not include the <code>/activechildren</code> endpoint). Your URL should look something like this.</p>
+    <p>In the <strong>Hops - Compute server URLs</strong> section, type in the web address of your virtual machine. Start by typing in <code>http://</code> followed by the IP address of the virtual machine followed by a <code>:</code> and the port number <code>80</code>. So, the full address would look something like this:</p>
+
+    <pre><code> http://52.168.38.105:80/
+</code></pre>
   </li>
   <li>
     <p>In the <strong>API Key</strong> section, enter the API Key that you saved in the <a href="../deploy-to-iis/#prerequisites">Prerequisites</a> section.
