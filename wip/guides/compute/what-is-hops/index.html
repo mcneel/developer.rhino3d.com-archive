@@ -6,20 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>What Is Hops with Grasshopper</title>
+  <title>What is Hops with Grasshopper</title>
   <meta name="description" content="This guide will help explain what Hops is all about and why you might want to use it.  Using Grasshopper">
 
   <!-- OpenGraph for Facebook, Twitter, Slack unfurling -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="/guides/compute/what-is-hops/" />
-  <meta property="og:title" content="What Is Hops" />
+  <meta property="og:title" content="What is Hops" />
   <meta property="og:description" content="This guide will help explain what Hops is all about and why you might want to use it." />
   <meta property=”og:site_name” content="developer.rhino3d.com"/>
   <meta property=”og:image” content="http://developer.rhino3d.com/images/rhinodev-logo-unfurl.png"/>
 
   <!-- twitter card tags additive with the og: tags -->
   <meta name="twitter:domain" value="developer.rhino3d.com" />
-  <meta name="twitter:title" value="What Is Hops" />
+  <meta name="twitter:title" value="What is Hops" />
   <meta name="twitter:description" value="This guide will help explain what Hops is all about and why you might want to use it." />
   
     <meta name="twitter:image" content="http://developer.rhino3d.com/images/rhinodev-logo-unfurl.png" />
@@ -409,7 +409,7 @@ $(document).ready(function()
             
             
             <li>
-              <a href="#what-is-hops">What is Hops?</a>
+              <a href="#how-it-works">How it works?</a>
 
               
                 <ul class="nav nav-stacked">
@@ -422,7 +422,16 @@ $(document).ready(function()
                     
                     
                     <li>
-                        <a href="#calling-functions-in-grasshopper">Calling Functions in Gras...</a>
+                        <a href="#the-hops-client">The Hops Client?</a>
+                    </li>
+                  
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="#the-rhino-server">The Rhino Server?</a>
                     </li>
                   
 
@@ -441,42 +450,8 @@ $(document).ready(function()
             
             
             <li>
-              <a href="#how-does-it-work">How does it work?</a>
+              <a href="#quick-links">Quick Links</a>
 
-              
-                <ul class="nav nav-stacked">
-                  
-
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="#what-is-a-client">What is a Client?</a>
-                    </li>
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="#what-is-a-server">What is a Server?</a>
-                    </li>
-                  
-                    
-                    
-                    
-                    
-                    
-                    <li>
-                        <a href="#putting-it-all-together">Putting it all together</a>
-                    </li>
-                  
-
-                </ul>
               
 
             </li>
@@ -505,13 +480,13 @@ $(document).ready(function()
               
           </ol>
 
-          <h1>What Is Hops</h1>
+          <h1>What is Hops</h1>
 
           <p>
   <span class="guide_byline">
     
       
-      by <a href="/wip/authors/andy_payne">Andy Payne</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/compute/what-is-hops.md" target="_blank">16 Feb 2022</a>)
+      by <a href="/wip/authors/andy_payne">Andy Payne</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/compute/what-is-hops.md" target="_blank">17 Feb 2022</a>)
     
   </span>
 
@@ -519,19 +494,19 @@ $(document).ready(function()
 
           <p>This guide will help explain what Hops is all about and why you might want to use it.</p>
 
-          <h2 id="what-is-hops">What is Hops?</h2>
-
-<p>Have you ever stared at a large complex Grasshopper definition and marveled at the inscrutability of it all? Visual programming is notorious for its ability to quickly become an illegible, tangled, mess of code. In fact, this state of disogranization is often referred to as <a href="http://wiki.c2.com/?SpaghettiCode">Spaghetti Code</a> or sometimes a <a href="https://joeyoder.com/PDFs/mud.pdf">Big Ball of Mud</a> for obvious reasons. There are a number of factors which often contribute to the creation of spaghetti code including time constraints, the skill level of the programmer, or even project complexity - but after trying to decipher a big ball of Grasshopper spaghetti, there is but one universal truth:</p>
+          <p>Grasshopper definitions can be big, complicated, and repetitive. This state of disorganization is called sometimes called <a href="http://wiki.c2.com/?SpaghettiCode">Spaghetti Code</a>. Many factors contribute to spaghetti code: time constraints, programmer skill level, project complexity, and limitations in the programming language. After trying to decipher a big ball of Grasshopper spaghetti, there is one universal truth:</p>
 
 <blockquote>
-  <h3 style="color:black; line-height: 1.3; margin-top: -4px;">Spaghetti code can make the task of understanding what the code actually does impractical or even impossible.</h3>
+  <h4 style="color:black; line-height: 1.3; margin-top: -4px;">Spaghetti code is hard to read and understand!</h4>
 </blockquote>
 
 <h3 id="calling-functions-in-grasshopper">Calling Functions in Grasshopper</h3>
 
-<p>So how do we begin to untangle this problem that has become so commonplace among Grasshopper developers? We begin by breaking down our spaghetti code into smaller reusable <strong>functions</strong>. In programming, a function is a “self-contained” module of code that usually takes in data, processes it, and returns a result. That sounds a lot like a Grasshopper definition. For example, Grasshopper definitions typically have inputs parameters like sliders, boolean toggles, or text which are fed through the graph to perform a series of actions, ultimately producing a result at the end. So, the key is to learn how to analyze a problem and break it down into smaller sub-definitions which we will use as functions.</p>
+<p>In programming, a <strong>function</strong> is a “self-contained” module of code that processes inputs and returns a result. Grasshopper definitions also process inputs and returns results. However, Grasshopper wasn’t written with functions in mind. Clusters sort of work, but don’t make it easy to reuse simple definitions in complex projects.</p>
 
-<p>Say, for instance, that you needed to run a shadow analysis for a parametric tower you were designing for New York City. This problem could be broken down into four smaller tasks:</p>
+<p>To fix this, the Hops component was added. Hops lets you use separate grasshopper definitions as functions. The key is learning to break a problem into smaller sub-definitions which we will use as functions.</p>
+
+<p>Imagine that you needed to run a shadow analysis for a parametric tower you were designing for New York City. This problem could be broken down into four smaller tasks:</p>
 <ol>
   <li>Create the building lot outline</li>
   <li>Create the building envelope</li>
@@ -539,53 +514,50 @@ $(document).ready(function()
   <li>Run the shadow analysis from the building enevlope and surrounding buildings</li>
 </ol>
 
-<p>Once the tasks have been clearly defined, you can determine what information will be needed to perform each task (i.e., the inputs) and what data will be returned at the end (i.e., the outputs). So, for step 1, the inputs needed to generate the building lot outline would include site setbacks and other regulatory parameters from the building and zoning codes. The output for this function would likely include a polyline outlining the maximum building area at the ground floor.</p>
+<p>Once the tasks have been clearly defined, you can determine what information will be needed to perform each task (i.e., the inputs) and what data will be returned at the end (i.e., the outputs). For step 1, the inputs needed to generate the building lot outline would include site setbacks and other regulatory parameters from the building and zoning codes. The output for this function would likely include a polyline outlining the maximum building area at the ground floor.</p>
 
-<p>To define the parameters which will be used in a Grasshopper function, we should use the <strong>Context Get</strong> components for the inputs and the <strong>Context Bake</strong> component for all outputs. Each of these can be found under the <em>Params Tab &gt; Util Group</em>.</p>
+<p>To define the parameters which will be used in a Grasshopper function, use the <strong>Context Get</strong> components for the inputs and the <strong>Context Bake</strong> component for the outputs. Each of these can be found under the <em>Params Tab &gt; Util Group</em>.</p>
 
 <p><img src="/wip/images/hops_context_getters.png" class="img-center" width="92%" /></p>
 
-<p>Now that we have the inputs and outputs defined, all that is left is to fill in the steps to turn those inputs into outputs. Here is the interesting part. After a function has been fully defined as a Grasshopper definition - meaning it contains some inputs and outputs and performs a number of actions in between - we can simplify our project by calling that function through Hops. Hops takes that larger definition and bundles it into a single component, only exposing the inputs and outputs you defined inside your function. Unlike clusters, Hops lets you reference external files which can be saved locally or on a network drive - making it easy to share definitions among other team members and collaborators.</p>
+<p>Now that we have the inputs and outputs defined, all that is left is to fill in the steps to turn those inputs into outputs. After a function has been fully defined as a Grasshopper definition it can be called by Hops. Hops exposes the inputs and outputs you defined inside your function in the containing definition. Unlike clusters, Hops lets you reference external files which can be saved locally or on a network drive - making it easy to share definitions among other team members and collaborators.</p>
 
 <p><img src="/wip/images/hops_ref_defintion.png" class="img-center" width="100%" /></p>
 
-<p>In summary, Hops enables you to dramatically increase the legibility of your code by simplifying complex definitions. In addition, it lets you share an reuse functions while eliminating duplicate component combinations which can be placed into a function. Hops also lets you solve functions in parallel, potentially speeding up large projects. And lastly, Hops lets you solve functions asynchronously without blocking Rhino and Grasshopper interactions.</p>
+<p>Hops lets you  increase the legibility of your code by simplifying complex definitions, reducing duplication, and sharing and reusing functions Hops lets you solve functions in parallel, potentially speeding up large projects. And Hops lets you solve functions asynchronously, without blocking Rhino and Grasshopper interactions.</p>
 
-<h2 id="how-does-it-work">How does it work?</h2>
+<h2 id="how-it-works">How it works?</h2>
 
-<p>In its most basic form, Hops is simply a client application for a Rhino.Compute server. I know, I’ve already lost you. But bear with me. Let’s break that statement down a bit.</p>
+<p>Behind the scenes, the Hops client passes the Grasshopper definition you specify to a headless instance of Rhino and Grasshopper server.</p>
 
-<h3 id="what-is-a-client">What is a Client?</h3>
+<h3 id="the-hops-client">The Hops Client?</h3>
 
-<p>A client is simply a hardware device (i.e., computer) or software application which makes a request for a digital resource from a server over a network connection. The client is designed for end-users to access resources such as files, videos, data or other computing resources.</p>
+<p>A client is a hardware device (i.e., computer) or software application which makes a request for a digital resource from a server over a network connection.</p>
 
-<p>For Hops, the client interface is simply the Hops component that you can find under the <em>Params Tab &gt; Util Group</em> after you install Hops through the package manager. When you right-click on the Hops component and set the path to a Grasshopper file on your local machine, you are telling Hops to bundle up the data in that file and send a request to a Rhino.Compute server to solve that definition and return the results.
-<img src="/wip/images/hops_hello_world3.png" class="img-center" width="85%" /></p>
+<p>The Hops component is the client. It can be found under the <em>Params Tab &gt; Util Group</em> after you install Hops through the package manager. Hops needs the path or URL for the definition that it is going to solve.
+<img src="/wip/images/hops_hello_world4.png" class="img-center" width="55%" /></p>
 
-<h3 id="what-is-a-server">What is a Server?</h3>
+<p>Once you specify the definition, the component updates to show the inputs and outputs defined in the definition.
+<img src="/wip/images/hops_io.png" class="img-center" width="30%" /></p>
 
-<p>A server’s sole purpose is to do what its name implies - serve its clients. It is usually a software application whose job is to receive and process incoming requests from a client and send an appropriate response. A server can be used to provide computing-intensive services to the client on demand and can be run on the same computer as the local client or on remote computer connected via a network.</p>
+<h3 id="the-rhino-server">The Rhino Server?</h3>
 
-<p>In the context of Hops, the server is an application which can process an incoming request and pass the relevant information to a headless version of Rhino. Headless simply means that there is no graphical interface that you can interact with (ie. viewports, toolbars, etc.). It’s simply a bare-bones version of Rhino which can run commands or solve Grasshopper definitions. The headless version of Rhino solves the Grasshopper definition and then returns the result in the form of a http response.
- <img src="/wip/images/hops_server1.png" class="img-center" width="70%" /></p>
+<p>A server serves data to its clients over a network connection.</p>
 
-<h3 id="putting-it-all-together">Putting it all together</h3>
+<p>In the context of Hops, the server is  a headless (meaning it has no user interface to interact with) version of Rhino and Grasshopper. The headless Rhino server solves the Grasshopper definition sent from Hops and then returns the result.
+<img src="/wip/images/hops_console.png" class="img-center" width="100%" /></p>
 
-<p>The communication process between Hops and Rhino.Compute is a little more nuanced than sending and receiving a single request and response. The first step in the process occurs when Hops bundles up the referenced Grasshopper definition and sends a http request to an endpoint on the server. An endpoint is simply a URL address where the server can be reached to perform a certain function. In this first request we need to ask the server to open the Grasshopper definition and determine what information we will need to populate the inputs and outputs for the Hops component. So, the endpoint will be called <code>/io</code> (short for Input Output).</p>
+<p>Hops optionally lets you point to a Rhino.Compute server running on another computer to solve the Grasshopper definitions. This lets you offload some or all of the solving to an external compute resource.</p>
 
-<p><img src="/wip/images/hops_io_request.png" class="img-center" width="100%" /></p>
+<hr />
 
-<p>At this point the Hops component should have enough information to create the necessary inputs and output nodes for itself. In this example, we have one input (cleverly called Input) which accepts some text value and one output (also aptly named as Output) which will return a text value.</p>
+<h2 id="quick-links">Quick Links</h2>
 
-<p><img src="/wip/images/hops_get_inputs.png" class="img-center" width="75%" /></p>
-
-<p>When all of the Hops inputs have been connected to source parameters, it will then send a new http request to the server only this time it will it will send the request to the <code>/solve</code> endpoint. We don’t need to send the referenced Grasshopper definition again with this call, since this was already stored on the server during the <code>/io</code> process. Instead, the data sent in the <code>/solve</code> request contains a pointer ID which tells the server where to find the correct file. Additionally, the request contains the data passed into the input parameters so the server can use those values in the Grasshopper definition and return a result. This time, the http response from the server contains all data which would normally be returned from running the Grasshopper file locally.</p>
-
-<p><img src="/wip/images/hops_return_results.png" class="img-center" width="70%" /></p>
-
-<p>To have a better understanding of how each step above works, you can export the last request/response for both the <code>/io</code> and <code>/solve</code> endpoints directly from the Hops component.</p>
-
-<p><img src="/wip/images/hops_export_requests.png" class="img-center" width="100%" /></p>
+<ul>
+  <li><a href="../how-hops-works">How Hops Works</a></li>
+  <li><a href="../hops-component">The Hops Component</a></li>
+  <li><a href="../deploy-to-iis">Setting up a Production Environment</a></li>
+</ul>
 
         </article>
 
