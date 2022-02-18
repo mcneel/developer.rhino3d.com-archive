@@ -6,20 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Hops Component with Grasshopper</title>
+  <title>The Hops Component with Grasshopper</title>
   <meta name="description" content="Hops adds functions to Grasshopper.  Using Grasshopper">
 
   <!-- OpenGraph for Facebook, Twitter, Slack unfurling -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="/guides/compute/hops-component/" />
-  <meta property="og:title" content="Hops Component" />
+  <meta property="og:title" content="The Hops Component" />
   <meta property="og:description" content="Hops adds functions to Grasshopper." />
   <meta property=”og:site_name” content="developer.rhino3d.com"/>
   <meta property=”og:image” content="http://developer.rhino3d.com/images/rhinodev-logo-unfurl.png"/>
 
   <!-- twitter card tags additive with the og: tags -->
   <meta name="twitter:domain" value="developer.rhino3d.com" />
-  <meta name="twitter:title" value="Hops Component" />
+  <meta name="twitter:title" value="The Hops Component" />
   <meta name="twitter:description" value="Hops adds functions to Grasshopper." />
   
     <meta name="twitter:image" content="http://developer.rhino3d.com/images/rhinodev-logo-unfurl.png" />
@@ -613,7 +613,7 @@ $(document).ready(function()
               
           </ol>
 
-          <h1>Hops Component</h1>
+          <h1>The Hops Component</h1>
 
           <p>
   <span class="guide_byline">
@@ -644,7 +644,7 @@ $(document).ready(function()
 
 <p><img src="/images/hops-overview.png" class="img-center" width="100%" /></p>
 
-<p>Hops is a component for Grasshopper in Rhino 7 for Windows. Hops adds external <em>functions</em> to Grasshopper. Like other programming languages, functions let you:</p>
+<p>Hops is a component for Grasshopper in Rhino 7 and Rhino 8 WIP for Windows. Hops adds external <strong>functions</strong> to Grasshopper. Like other programming languages, functions let you:</p>
 
 <ul>
   <li>Simplify complex algorithms by using the same function multiple times.</li>
@@ -684,21 +684,21 @@ $(document).ready(function()
 
 <p>Hops functions are Grasshopper documents with special inputs and outputs.</p>
 
-<p><img src="/images/hops-function-3.png" class="img-center" width="100%" /></p>
+<p><img src="/images/hops_simple_function.png" class="img-center" width="100%" /></p>
 
 <h4 id="defining-inputs">Defining Inputs</h4>
 
 <p>Hops inputs are created using the <strong>Get Components</strong>. The available Get components in Grasshopper are found under <em>Params Tab &gt; Util Group</em>:</p>
 
-<p><img src="/images/hops-get-components.png" class="img-center" width="60%" /></p>
+<p><img src="/images/hops_context_getters1.png" class="img-center" width="65%" /></p>
 
-<p>The name of the component is used for the name of the Hops input parameter. So, in the example above, we have three Get components with names A, B, and C. Each of these Get components become input parameters when Hops compiles the definition.</p>
+<p>The name of the component is used for the name of the Hops input parameter. So, in the example above, we have three Get Number components with names A, B, and C. Each of these Get components become input parameters when Hops compiles the definition.</p>
 
-<p><img src="/images/hops_inputs-2.png" class="img-center" width="80%" /></p>
+<p><img src="/images/hops_getter_inputs.png" class="img-center" width="80%" /></p>
 
 <p>Each Get component has a context menu (right-click) with various settings.</p>
 
-<p><img src="/images/gh-hops-get-component-menu.png" class="img-center" width="55%" /></p>
+<p><img src="/images/gh-hops-get-component-menu.png" class="img-center" width="50%" /></p>
 
 <ul>
   <li><strong>Component Name</strong> - This is the name that will be assigned to the input of the Hops component.</li>
@@ -712,9 +712,9 @@ $(document).ready(function()
 
 <h4 id="defining-outputs">Defining Outputs</h4>
 
-<p>Hops outputs are geometry or primitive params in a group named: “RH_OUT:[name]”, where [name] is the name of the output parameter. In this case, the name of the output is “o”.</p>
+<p>Hops outputs can be defined using the <strong>Context Bake</strong> or <strong>Context Print</strong> components. The name of the input parameter on either of the Context components will be used as the name of the output parameter when Hops gets computed.</p>
 
-<p><img src="/images/hops_output.png" class="img-center" width="80%" /></p>
+<p><img src="/images/hops_getter_outputs.png" class="img-center" width="67%" /></p>
 
 <h3 id="use-the-hops-component">Use the Hops component</h3>
 
@@ -726,7 +726,7 @@ $(document).ready(function()
   <li>Use the new component like any other Grasshopper component.</li>
 </ol>
 
-<p><img src="/images/gh-hops-path.png" class="img-center" width="100%" /></p>
+<p><img src="/images/hops_multiplyadd.png" class="img-center" width="80%" /></p>
 
 <h3 id="a-note-about-hops-for-macos-users">A note about Hops for macOS users</h3>
 
