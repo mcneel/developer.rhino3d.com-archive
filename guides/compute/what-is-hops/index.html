@@ -471,6 +471,15 @@ $(document).ready(function()
                     
                     
                     <li>
+                        <a href="#install-hops">Install Hops</a>
+                    </li>
+                  
+                    
+                    
+                    
+                    
+                    
+                    <li>
                         <a href="#create-an-input">Create an Input</a>
                     </li>
                   
@@ -489,7 +498,7 @@ $(document).ready(function()
                     
                     
                     <li>
-                        <a href="#create-the-output">Create the Output</a>
+                        <a href="#create-an-output">Create an Output</a>
                     </li>
                   
                     
@@ -620,9 +629,22 @@ $(document).ready(function()
 
 <p>In this example we want to create a simple function that will take in a user’s name as an input (i.e., David) and return a message such as <em>“Hello David!”</em>.</p>
 
+<h3 id="install-hops">Install Hops</h3>
+
+<p>Before we begin, let’s start by making sure Hops is installed properly. There are a few ways to install hops on your machine.</p>
+<ol>
+  <li><a href="rhino://package/search?name=hops">Install Hops</a> (This will launch Rhino)</li>
+  <li>Or, type <code>PackageManager</code> on the Rhino command line.
+    <ol>
+      <li>Then, search for “Hops”</li>
+      <li>Select Hops and then Install</li>
+    </ol>
+  </li>
+</ol>
+
 <h3 id="create-an-input">Create an Input</h3>
 
-<p>Let’s start by defining an input text parameter. Under the <em>Params Tab &gt; Util Group</em> you will see a collection of Context Getter components. Place a <strong>Get String</strong> component onto your canvas. Right-click on the middle of this component and change the name from <em>“Get String”</em> to <em>“Name”</em>. This value is what Hops will use as the input parameter name.
+<p>Now that we have Hops installed, let’s start defining our function by creating an input text parameter. Under the <em>Params Tab &gt; Util Group</em> you will see a collection of Context Getter components. Place a <strong>Get String</strong> component onto your canvas. Right-click on the middle of this component and change the name from <code>Get String</code> to <code>Name</code>. This value is what Hops will use as for the input parameter name.
 <img src="/images/hops_getting_started_01.png" class="img-center" width="100%" /></p>
 
 <p>You can assign a default value to this parameter by connecting a string to the input of the Get String component. Add a <strong>Text Panel</strong> to the canvas. This can be found under the <em>Params Tab &gt; Input Group</em>. Double-click on the Text Panel and write your name in the input.
@@ -632,22 +654,22 @@ $(document).ready(function()
 
 <p>Now that we have created an input parameter, we need to perform some sort of action using that value. Let’s create a message using the name you just passed into the Get String component. Add a <strong>Concatenate Component</strong> onto the canvas. This can be found under the <em>Sets Tab &gt; Text Group</em>.</p>
 
-<p>The Concatenate component will add a series of text snippets into a single message. In our case, we want to create a string that reads “Hello <em>Your Name Here</em>!”.</p>
+<p>The Concatenate component will add a series of text snippets into a single message. In our case, we want to create a string that reads <code>Hello Your Name Here!</code>.</p>
 
 <p>The Concatenate component is a special type of component in Grasshopper which uses a Zoomable User Interface (ZUI for short). If you zoom in on the component (using the middle scroll wheel), a small (+) button will appear on the left side of the component. Click on the (+) under the second parameter (B) to add a third input parameter.</p>
 
-<p>Now, zoom out and add another Text Panel onto the canvas. Double-click on it to enter some text. Type *Hello * into the panel (Note: there is an extra space added after the word). Connect that panel into the A-input of the Concatenate component.</p>
+<p>Now, zoom out and add another Text Panel onto the canvas. Double-click on it to enter some text. Type <code>Hello </code> into the panel (Note: there is an extra space added after the word). Connect that panel into the A-input of the Concatenate component.</p>
 
-<p>Next, connect the output of the Get String component to the B-input of the Concatenate component. Finally, add another text panel onto your canvas and type an exclamation mark (!) into the panel. Connect the output of that text panel into the C-input of the Concatenate component.</p>
+<p>Next, connect the output of the Get String component to the B-input of the Concatenate component. Finally, add another text panel onto your canvas and type an exclamation mark <code>!</code> into the panel. Connect the output of that text panel into the C-input of the Concatenate component.</p>
 
 <p>Connect a Text Panel to the output of the Concatenate component to view this message. Your definition should look like this.
 <img src="/images/hops_getting_started_03.png" class="img-center" width="100%" /></p>
 
-<h3 id="create-the-output">Create the Output</h3>
+<h3 id="create-an-output">Create an Output</h3>
 
 <p>The last step in creating our Hops function would be to create an output parameter to return the string we just created. Go to the <em>Param Tab &gt; Util Group</em> and add a <strong>Context Print</strong> component to your canvas.</p>
 
-<p>Right-click on the input parameter (labeled Tx) and change the name to <em>“Message”</em>. You can name this anything you like, but this value is what Hops will use for the output parameter.</p>
+<p>Right-click on the input parameter (labeled Tx) and change the name to <code>Message</code>. You can name this anything you like, but this value is what Hops will use for the output parameter.</p>
 
 <p>Now save your file to some directory on your computer. Call the file <strong>Hello_World.gh</strong>.
 <img src="/images/hops_getting_started_04.png" class="img-center" width="100%" /></p>
@@ -658,7 +680,7 @@ $(document).ready(function()
 
 <p>Go to the <em>Param Tab &gt; Util Group</em> and add a <strong>Hops</strong> component to your canvas. Right-click on this component and select the <strong>Path</strong> menu item. In the pop-up dialog, select the <strong>Hello_World.gh</strong> file we just created. Select <strong>OK</strong> when the path has been selected.</p>
 
-<p>At this point, the Hops component should change appearance - adding one input called <em>Name</em> and one output called <em>Message</em>. Hops essentially bundled up the Hello_World.gh example we created and sent it to a local rhino.compute server to perform the calculation and return the result.</p>
+<p>At this point, the Hops component should change appearance - adding one input called <code>Name</code> and one output called <code>Message</code>. Hops essentially bundled up the Hello_World.gh example we created and sent it to a local rhino.compute server to perform the calculation and return the result.</p>
 
 <p>Try adding a new <strong>Text Panel</strong> onto the canvas and connect it to the Name-input of the Hops component. Double-click to change the name in the Text panel. Add another Text Panel to the output of the Hops component to see the result that is return from the rhino.compute server.
 <img src="/images/hops_getting_started_05.png" class="img-center" width="100%" /></p>
