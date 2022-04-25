@@ -436,7 +436,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/authors/will_pearson">Will Pearson</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/yak/package-sources.md" target="_blank">12 Feb 2021</a>)
+      by <a href="/authors/will_pearson">Will Pearson</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/yak/package-sources.md" target="_blank">25 Apr 2022</a>)
     
   </span>
 
@@ -453,7 +453,7 @@ $(document).ready(function()
 <p>A custom package repository is simply a folder that contains .yak package files. The folder can be on the local machine or on a shared file server. You can configure Rhino to include packages from this repository in the Package Manager by following the steps below.</p>
 
 <ol>
-  <li>Go to <em>Options &gt; Advanced</em> and look for the <code>Rhino.PackageManager.Sources</code> setting.</li>
+  <li>Go to <em>Options &gt; Advanced</em> and look for the <code>Rhino.Options.PackageManager.Sources</code> setting.</li>
   <li>Add the full path to your package repository folder, separating it from the default package server with a semi-colon, e.g. <code>https://yak.rhino3d.com;C:\rhino_packages</code>.</li>
   <li>Run the <code>_PackageManager</code> command and search for one of the packages that you added to the new package repository.</li>
 </ol>
