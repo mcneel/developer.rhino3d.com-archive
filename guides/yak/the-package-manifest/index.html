@@ -728,7 +728,17 @@ url: "https://github.com/meshmash/Plankton"
   This is such an awesome package
   that I'm going to write a whole
   bunch of text describing it!
+
+  This sentence will be on a new line.
 </code></pre>
+
+<!-- Or, if you want to preserve newlines, use the [literal style](https://yaml.org/spec/1.2-old/spec.html#id2795688)
+
+```yaml
+description: |
+  This is the first line of the description.
+  This sentence is (and will be) on a new line!
+``` -->
 
 <h2 id="recommended-attributes">Recommended Attributes</h2>
 
@@ -811,7 +821,7 @@ dependencies:
 <h3 id="icon-url">Icon URL</h3>
 
 <div class="alert alert-warning" role="alert">
-⚠️ Replaced by the [icon](#icon) attribute.
+⚠️ Replaced by the <a href="#icon" class="alert-link">icon</a> attribute.
 </div>
 
 <p>Specify a <strong>direct</strong> link to an icon that will be used by the Package Manager in Rhino. It should be small (32x32 is ideal) and it must be either a PNG or a JPEG.</p>
