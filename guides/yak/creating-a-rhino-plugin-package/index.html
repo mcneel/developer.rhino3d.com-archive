@@ -468,7 +468,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/authors/will_pearson">Will Pearson</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/yak/creating-a-rhino-plugin-package.md" target="_blank">04 Feb 2021</a>)
+      by <a href="/authors/will_pearson">Will Pearson</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/yak/creating-a-rhino-plugin-package.md" target="_blank">12 May 2022</a>)
     
   </span>
 
@@ -495,6 +495,7 @@ files that you would like to distribute in your package. Something like this…<
 <pre><code class="language-commandline">C:\Users\Bozo\dist
 ├── Tamarin.rhp
 ├── Tamarin.dll
+├── icon.png
 └── misc\
     ├── README.md
     └── LICENSE.txt
@@ -537,6 +538,12 @@ to populate the version field, since this attribute isn’t bound to the Microso
 four-digit version spec and can contain a SemVer-compatible version string. The
 <code>AssemblyVersion</code> attribute is used as a fallback.</p>
 
+<div class="alert alert-info" role="alert">
+<strong>Note:</strong> The `spec` command is useful for generating the
+manifest.yml file initially. Once you have one, keep it with your project and
+update it for each release.
+</div>
+
 <p>Next, open the manifest file with your <a href="https://code.visualstudio.com">favourite editor</a>
 and fill in the gaps.</p>
 
@@ -551,6 +558,7 @@ description: &gt;
   This plug-in does something. I'm not really sure exactly what it's supposed to
   do, but it does it better than any other plug-in.
 url: https://example.com
+icon: icon.png
 keywords:
 - something
 </code></pre>
