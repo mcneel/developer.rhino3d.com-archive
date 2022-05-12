@@ -530,6 +530,15 @@ $(document).ready(function()
                         <a href="#keywords">Keywords</a>
                     </li>
                   
+                    
+                    
+                    
+                    
+                    
+                    <li>
+                        <a href="#icon">Icon</a>
+                    </li>
+                  
 
                 </ul>
               
@@ -546,7 +555,7 @@ $(document).ready(function()
             
             
             <li>
-              <a href="#optional-attributes">Optional Attributes</a>
+              <a href="#obsolete-attributes">Obsolete Attributes</a>
 
               
                 <ul class="nav nav-stacked">
@@ -616,7 +625,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/authors/will_pearson">Will Pearson</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/yak/the-package-manifest.md" target="_blank">21 Jul 2021</a>)
+      by <a href="/authors/will_pearson">Will Pearson</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/yak/the-package-manifest.md" target="_blank">12 May 2022</a>)
     
   </span>
 
@@ -645,6 +654,7 @@ $(document).ready(function()
 <ul>
   <li><a href="#url">URL</a></li>
   <li><a href="#keywords">Keywords</a></li>
+  <li><a href="#icon">Icon</a></li>
 </ul>
 
 <!-- ### Optional Attributes
@@ -754,14 +764,14 @@ You should specify a license for your package so that people know how they are p
 - two
 </code></pre>
 
-<h2 id="optional-attributes">Optional Attributes</h2>
+<h3 id="icon">Icon</h3>
 
-<h3 id="icon-url">Icon URL</h3>
+<p>An icon file in the package. It should be small (e.g. 64x64) and it must be either a PNG or a JPEG.</p>
 
-<p>Specify a <strong>direct</strong> link to an icon that will be used by the Package Manager in Rhino. It should be small (32x32 is ideal) and it must be either a PNG or a JPEG.</p>
-
-<pre><code class="language-yaml">icon_url: "https://example.com/path/to/icon.png"
+<pre><code class="language-yaml">icon: icon.png
 </code></pre>
+
+<!-- ## Optional Attributes -->
 
 <!-- ### Dependencies
 
@@ -795,6 +805,19 @@ dependencies:
   "type": "gh-plugin"
 }
 ``` -->
+
+<h2 id="obsolete-attributes">Obsolete Attributes</h2>
+
+<h3 id="icon-url">Icon URL</h3>
+
+<div class="alert alert-warning" role="alert">
+⚠️ Replaced by the [icon](#icon) attribute.
+</div>
+
+<p>Specify a <strong>direct</strong> link to an icon that will be used by the Package Manager in Rhino. It should be small (32x32 is ideal) and it must be either a PNG or a JPEG.</p>
+
+<pre><code class="language-yaml">icon_url: "https://example.com/path/to/icon.png"
+</code></pre>
 
 <hr />
 
