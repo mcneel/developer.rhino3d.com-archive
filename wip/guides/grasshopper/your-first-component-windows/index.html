@@ -547,7 +547,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/wip/authors/dan_rigdon_bel">Dan Rigdon-Bel</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/grasshopper/your-first-component-windows.md" target="_blank">03 Sep 2021</a>)
+      by <a href="/wip/authors/dan_rigdon_bel">Dan Rigdon-Bel</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/grasshopper/your-first-component-windows.md" target="_blank">09 May 2022</a>)
     
   </span>
 
@@ -641,44 +641,44 @@ $(document).ready(function()
 </code></pre>
   </li>
   <li>If you hover over <code>GH_Component</code> you will notice this is actually <code>Grasshopper.Kernel.GH_Component</code>.</li>
-  <li>
-    <p><code>HelloGrasshopperComponent</code> also overrides two methods for determining the input and output parameters …</p>
+  <li><code>HelloGrasshopperComponent</code> also overrides two methods for determining the input and output parameters …</li>
+</ol>
 
-    <pre><code> protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
- ...
- protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
+<pre><code class="language-cs">protected override void RegisterInputParams(GH_Component.GH_InputParamManager pManager)
+...
+protected override void RegisterOutputParams(GH_Component.GH_OutputParamManager pManager)
 </code></pre>
-  </li>
-  <li>
-    <p>The actual work done by the component is to be found in the <code>SolveInstance</code> method…</p>
+<ol>
+  <li>The actual work done by the component is to be found in the <code>SolveInstance</code> method…</li>
+</ol>
 
-    <pre><code> protected override void SolveInstance(IGH_DataAccess DA)
+<pre><code class="language-cs">protected override void SolveInstance(IGH_DataAccess DA)
 </code></pre>
-  </li>
-  <li>
-    <p>As you can see, this is where the action happens.  This boilerplate component creates a spiral on a plane.  Just to make sure everything is working, let’s change the default plane on which the spiral is constructed.  On line<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> 67, in <code>SolveInstance</code>, notice that an XY plane is constructed…</p>
+<ol>
+  <li>As you can see, this is where the action happens.  This boilerplate component creates a spiral on a plane.  Just to make sure everything is working, let’s change the default plane on which the spiral is constructed.  On line<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> 67, in <code>SolveInstance</code>, notice that an XY plane is constructed…</li>
+</ol>
 
-    <pre><code> Plane plane = Plane.WorldXY;
+<pre><code class="language-cs">Plane plane = Plane.WorldXY;
 </code></pre>
-  </li>
-  <li>
-    <p>Further down in the <code>SolveInstance</code> method, you will notice that the input data is being fed into this plane…</p>
+<ol>
+  <li>Further down in the <code>SolveInstance</code> method, you will notice that the input data is being fed into this plane…</li>
+</ol>
 
-    <pre><code> if (!DA.GetData(0, ref plane)) return;
+<pre><code class="language-cs">if (!DA.GetData(0, ref plane)) return;
 </code></pre>
-  </li>
-  <li>
-    <p>Go back to the <code>RegisterInputParams</code>, and find the line where the <em>Plane</em> input is registered.  The last argument being fed to the method - <code>Plane.WorldXY</code> - is the default value of the input…</p>
+<ol>
+  <li>Go back to the <code>RegisterInputParams</code>, and find the line where the <em>Plane</em> input is registered.  The last argument being fed to the method - <code>Plane.WorldXY</code> - is the default value of the input…</li>
+</ol>
 
-    <pre><code> pManager.AddPlaneParameter("Plane", "P", "Base plane for spiral", GH_ParamAccess.item, Plane.WorldXY);
+<pre><code class="language-cs">pManager.AddPlaneParameter("Plane", "P", "Base plane for spiral", GH_ParamAccess.item, Plane.WorldXY);
 </code></pre>
-  </li>
-  <li>
-    <p>Change the default value of the <em>Plane</em> input to be <code>Plane.WorldYZ</code> …</p>
+<ol>
+  <li>Change the default value of the <em>Plane</em> input to be <code>Plane.WorldYZ</code> …</li>
+</ol>
 
-    <pre><code> pManager.AddPlaneParameter("Plane", "P", "Base plane for spiral", GH_ParamAccess.item, Plane.WorldYZ);
+<pre><code class="language-cs">pManager.AddPlaneParameter("Plane", "P", "Base plane for spiral", GH_ParamAccess.item, Plane.WorldYZ);
 </code></pre>
-  </li>
+<ol>
   <li>Now let’s examine what happens when inputs are given to this component…</li>
 </ol>
 

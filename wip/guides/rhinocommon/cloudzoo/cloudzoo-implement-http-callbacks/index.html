@@ -549,7 +549,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/wip/authors/aj">Andrés Jacobo</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinocommon/cloudzoo/cloudzoo-implement-http-callbacks.md" target="_blank">25 Jun 2019</a>)
+      by <a href="/wip/authors/aj">Andrés Jacobo</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/master/_guide_topics/rhinocommon/cloudzoo/cloudzoo-implement-http-callbacks.md" target="_blank">09 May 2022</a>)
     
   </span>
 
@@ -682,32 +682,32 @@ deny the request. This callback is invoked whenever a license is about to be add
 
 <pre><code>POST /add_license
 {
-    "entityId": "9304194021213-|-Group",
-    "entityType": "Group",
-    "license": {
-		   "key": "RH50-ABCD-EFGZ-HIJK-LMNO",
-		   "aud": "PRODUCT-ID-HERE"
-	   },
-    "userInfo": {
-	    "sub": "43190412048124",
-	    "email": "marley_the_dog@mcneel.com",
-	    "com.rhino3d.accounts.emails": [
-		    "marley_the_dog@mcneel.com",
-		    "marleyz121@gmail.com"
-	    ],
-	    "com.rhino3d.accounts.member_groups": [
-		    {
-			    "id": "9304194021213",
-			    "name": "Marley’s Friends LLC"
+	"entityId": "9304194021213-|-Group",
+	"entityType": "Group",
+	"license": {
+			"key": "RH50-ABCD-EFGZ-HIJK-LMNO",
+			"aud": "PRODUCT-ID-HERE"
+		},
+	"userInfo": {
+		"sub": "43190412048124",
+		"email": "marley_the_dog@mcneel.com",
+		"com.rhino3d.accounts.emails": [
+			"marley_the_dog@mcneel.com",
+			"marleyz121@gmail.com"
+		],
+		"com.rhino3d.accounts.member_groups": [
+			{
+				"id": "9304194021213",
+				"name": "Marley’s Friends LLC"
 			}
-	    ],
-	    "com.rhino3d.accounts.admin_groups": [],
-	    "com.rhino3d.accounts.owner_groups": [],
-	    "name": "Marley",
-	    "locale": "en-gb",
+		],
+		"com.rhino3d.accounts.admin_groups": [],
+		"com.rhino3d.accounts.owner_groups": [],
+		"name": "Marley",
+		"locale": "en-gb",
 		"picture": "http://marley.the.dog.com/images/coolpic.png"
-     },    
-    "precondition": "RH40-ABCD-EFGZ-HIJK-LMNO"
+		},    
+	"precondition": "RH40-ABCD-EFGZ-HIJK-LMNO"
 }
 </code></pre>
 
