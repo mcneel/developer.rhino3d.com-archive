@@ -522,6 +522,38 @@ $(document).ready(function()
             
             
             <li>
+              <a href="#testing-the-app">Testing the app</a>
+
+              
+
+            </li>
+          
+
+        
+          
+
+          
+            
+            
+            
+            
+            <li>
+              <a href="#modifying-compute-parameters-after-deployment">Modifying Compute Paramet...</a>
+
+              
+
+            </li>
+          
+
+        
+          
+
+          
+            
+            
+            
+            
+            <li>
               <a href="#updating-the-deployment">Updating The Deployment</a>
 
               
@@ -549,38 +581,6 @@ $(document).ready(function()
                   
 
                 </ul>
-              
-
-            </li>
-          
-
-        
-          
-
-          
-            
-            
-            
-            
-            <li>
-              <a href="#testing-the-app">Testing the app</a>
-
-              
-
-            </li>
-          
-
-        
-          
-
-          
-            
-            
-            
-            
-            <li>
-              <a href="#modifying-compute-parameters-after-deployment">Modifying Compute Paramet...</a>
-
               
 
             </li>
@@ -633,7 +633,7 @@ $(document).ready(function()
   <span class="guide_byline">
     
       
-      by <a href="/authors/andy_payne">Andy Payne</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/compute/deploy-to-iis.md" target="_blank">17 May 2022</a>)
+      by <a href="/authors/andy_payne">Andy Payne</a> (Last modified: <a href="https://github.com/mcneel/developer-rhino3d-com/commits/7/_guide_topics/compute/deploy-to-iis.md" target="_blank">18 May 2022</a>)
     
   </span>
 
@@ -770,38 +770,7 @@ Follow the <a href="../core-hour-billing"><u>"Core-Hour Billing" guide</u></a> t
 </code></pre>
   </li>
   <li>
-    <p>At the end of the step 2 installation script, you should see the message *“Congratulations! All components have now been installed.” This will be followed by some instructions about how to install 3rd party plugins so that they will work properly with Rhino.Compute. Please take note of the new <strong>Username</strong> and <strong>Password</strong> which will be required when logging back in to install any additional plugin.</p>
-  </li>
-</ol>
-
-<h2 id="updating-the-deployment">Updating The Deployment</h2>
-<p>If you have already setup Rhino.Compute and/or IIS on this machine, you may need to periodically update Rhino and/or the Rhino.Compute build files to the latest version. Follow the steps below to update these applications.</p>
-
-<h3 id="update-rhino">Update Rhino</h3>
-
-<ol>
-  <li>
-    <p>Click on the Windows Start menu and type in “Powershell”. In the menu that appears, right-click on the <strong>Windows Powershell app</strong> and choose <strong>Run As Administrator</strong>.</p>
-  </li>
-  <li>
-    <p><strong>Copy and paste</strong> the command below into the Powershell prompt and hit <strong>Enter</strong>. This command will download the latest version of Rhino for Windows. Note: you will be prompted to enter your <strong>Email Address</strong> so please have that information available.</p>
-
-    <pre><code class="language-powershell">iwr -useb https://raw.githubusercontent.com/mcneel/compute.rhino3d/master/script/production/module_update_rhino.ps1 -outfile update_rhino.ps1; .\update_rhino.ps1 
-</code></pre>
-  </li>
-</ol>
-
-<h3 id="update-compute">Update Compute</h3>
-
-<ol>
-  <li>
-    <p>Click on the Windows Start menu and type in “Powershell”. In the menu that appears, right-click on the <strong>Windows Powershell app</strong> and choose <strong>Run As Administrator</strong>.</p>
-  </li>
-  <li>
-    <p><strong>Copy and paste</strong> the command below into the Powershell prompt and hit <strong>Enter</strong>. This command will download the latest version of Rhino.Compute.</p>
-
-    <pre><code class="language-powershell">iwr -useb https://raw.githubusercontent.com/mcneel/compute.rhino3d/master/script/production/module_update_compute.ps1 -outfile update_compute.ps1; .\update_compute.ps1 
-</code></pre>
+    <p>At the end of the step 2 installation script, you should see the message <em>Congratulations! All components have now been installed.</em> This will be followed by some instructions about how to install 3rd party plugins so that they will work properly with Rhino.Compute. Please take note of the new <strong>Username</strong> and <strong>Password</strong> which will be required when logging back in to install any additional plugin.</p>
   </li>
 </ol>
 
@@ -931,6 +900,37 @@ of this handle and will shut down when this process has exited. Since we are rel
 </ul>
 
 <p>Once you have modified web.config file, <strong>save</strong> it and close the file. You can then go back to the IIS Manager and <strong>Start</strong> the web server by clicking on the web server node in the <strong>Connections</strong> panel on the left and clicking <strong>Start</strong> in the <strong>Actions</strong> pane on the right.</p>
+
+<h2 id="updating-the-deployment">Updating The Deployment</h2>
+<p>If you have already setup Rhino.Compute and/or IIS on this machine, you may need to periodically update Rhino and/or the Rhino.Compute build files to the latest version. Follow the steps below to update these applications.</p>
+
+<h3 id="update-rhino">Update Rhino</h3>
+
+<ol>
+  <li>
+    <p>Click on the Windows Start menu and type in “Powershell”. In the menu that appears, right-click on the <strong>Windows Powershell app</strong> and choose <strong>Run As Administrator</strong>.</p>
+  </li>
+  <li>
+    <p><strong>Copy and paste</strong> the command below into the Powershell prompt and hit <strong>Enter</strong>. This command will download the latest version of Rhino for Windows. Note: you will be prompted to enter your <strong>Email Address</strong> so please have that information available.</p>
+
+    <pre><code class="language-powershell">iwr -useb https://raw.githubusercontent.com/mcneel/compute.rhino3d/master/script/production/module_update_rhino.ps1 -outfile update_rhino.ps1; .\update_rhino.ps1 
+</code></pre>
+  </li>
+</ol>
+
+<h3 id="update-compute">Update Compute</h3>
+
+<ol>
+  <li>
+    <p>Click on the Windows Start menu and type in “Powershell”. In the menu that appears, right-click on the <strong>Windows Powershell app</strong> and choose <strong>Run As Administrator</strong>.</p>
+  </li>
+  <li>
+    <p><strong>Copy and paste</strong> the command below into the Powershell prompt and hit <strong>Enter</strong>. This command will download the latest version of Rhino.Compute.</p>
+
+    <pre><code class="language-powershell">iwr -useb https://raw.githubusercontent.com/mcneel/compute.rhino3d/master/script/production/module_update_compute.ps1 -outfile update_compute.ps1; .\update_compute.ps1 
+</code></pre>
+  </li>
+</ol>
 
 <hr />
 
