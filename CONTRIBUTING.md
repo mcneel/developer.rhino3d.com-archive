@@ -2,6 +2,8 @@
 
 Pull requests are welcome! :tada:
 
+:warning: _**THIS SITE IS TRANSITIONING FROM JEKYLL TO HUGO.**  Updated instructions coming soon_ :warning:
+
 Please read the [Style Guide](./_guide_topics/general/developer-docs-style-guide.md)
 and ["How This Site Works"](./_guide_topics/general/how-this-site-works.md).
 

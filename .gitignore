@@ -1,19 +1,34 @@
-_site
-.sass-cache
-_template.md
+### Hugo ###
+# Generated files by hugo
+/public*
+/resources/_gen/
+.hugo_build.lock
 
-bin
-obj
+# User-specific vscode files
+.vscode/.ropeproject
 
-*.userprefs
+# Generated files by deploy script
+/public-last-run/
+**/admin/localization-status/index.md
+_s3_sync.*
+hugo
 
-Gemfile.lock
-script/.ssh
-.bundle
-.jekyll-metadata
+# Executable may be added to repository
+hugo.exe
+hugo.darwin
+hugo.linux
+*obj
+*bin
+# Temporary script-generated contents
+*_temp
+_s3_sync_test.sh
+hugo.log
 
-_config_ci.yml
+# Python
+__pycache__
+*.pyc
+
+# macOS cruft
 .DS_Store
-
-vendor/gems
-vendor/bundle
+s5cmd
+themes/rhino3d.com-theme/script/Launch/.vs/Launch/xs
